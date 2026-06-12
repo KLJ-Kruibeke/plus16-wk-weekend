@@ -139,7 +139,7 @@
   .packing-page { background: var(--red-dark, #9B0C22); min-height: calc(100vh - 56px); padding: 4rem 2rem; position: relative; overflow: hidden; }
   .packing-page::before { content: '⚽'; position: absolute; font-size: 22rem; opacity: 0.04; right: -4rem; top: -2rem; line-height: 1; pointer-events: none; }
   .packing-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
-  .packing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; margin-top: 2rem; }
+  .packing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-top: 2rem; }
   .pack-category { background: rgba(0,0,0,0.22); border-radius: 0.5rem; padding: 1.5rem; border: 1px solid rgba(255,255,255,0.1); }
   .pack-category-title { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
   .pack-list { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
@@ -181,7 +181,7 @@
   .cards-section { background: var(--off-black); padding: 4rem 2rem; }
   .cards-inner { max-width: 1000px; margin: 0 auto; }
   .cards-intro { text-align: center; color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.7; margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
-  .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; justify-items: center; }
+  .cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; justify-items: center; }
   .fifa-card-wrap { display: flex; flex-direction: column; align-items: center; }
   .fifa-card { width: 100%; max-width: 220px; border-radius: 12px; overflow: hidden; box-shadow: none; border: none; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; background: transparent; mix-blend-mode: lighten; }
   .fifa-card:hover { transform: translateY(-6px) scale(1.03); box-shadow: 0 16px 48px rgba(245,197,24,0.2); }
@@ -192,7 +192,7 @@
     .nav-links { display: none; }
     .hamburger { display: flex; }
     .score-grid { grid-template-columns: repeat(2, 1fr); }
-    .hero-title { font-size: 4.5rem; }
+    .hero-title { font-size: 4.5rem; } .cards-grid { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 </head>
@@ -250,16 +250,16 @@
       <p class="cards-intro">Dit zijn de vier teamcaptains die jullie WK Weekend gaan begeleiden. Elk met hun eigen stats — wie heeft de hoogste rating?</p>
       <div class="cards-grid">
         <div class="fifa-card-wrap">
-          <div class="fifa-card"><img src="1.png" alt="Ben De Cock"></div>
+          <div class="fifa-card"><img src="1.png" alt="Ben De Cock" loading="lazy" decoding="async"></div>
         </div>
         <div class="fifa-card-wrap">
-          <div class="fifa-card"><img src="2.png" alt="Jari Van Landeghem"></div>
+          <div class="fifa-card"><img src="2.png" alt="Jari Van Landeghem" loading="lazy" decoding="async"></div>
         </div>
         <div class="fifa-card-wrap">
           <div class="flip-wrap" onclick="this.querySelector('.flip-inner').classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="3.png" alt="Mathis Volckerick" style="width:100%;display:block;border-radius:12px;mix-blend-mode:lighten"></div><div class="flip-back" style="position:absolute;inset:0;transform:rotateY(180deg);background:linear-gradient(135deg,#C8102E,#9B0C22);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem;padding:1rem;text-align:center;backface-visibility:hidden"><div style="font-size:3rem">🐕</div><div style="font-family:Bebas Neue,sans-serif;font-size:1.8rem;color:#F5C518;line-height:1.1">"Ik ben een dagoe!"</div><div style="font-size:.75rem;color:rgba(255,255,255,.5);letter-spacing:.1em;text-transform:uppercase">Mathis Volckerick</div></div></div></div>
         </div>
         <div class="fifa-card-wrap">
-          <div class="fifa-card"><img src="4.png" alt="Seppe Illeghems"></div>
+          <div class="fifa-card"><img src="4.png" alt="Seppe Illeghems" loading="lazy" decoding="async"></div>
         </div>
       </div>
     </div>
