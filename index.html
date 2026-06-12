@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WK Weekend +16 — KLJ Kruibeke</title>
+<title>+16 KLJ Kruibeke — WK Weekend</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -17,27 +17,153 @@
     --black: #0D0D0D;
     --off-black: #1A1A1A;
     --white: #FFFFFF;
-    --gray: #F7F7F7;
   }
 
-  html { scroll-behavior: smooth; }
-
-  body {
+  html, body {
+    height: 100%;
     font-family: 'Inter', sans-serif;
     background: var(--black);
     color: var(--white);
     overflow-x: hidden;
   }
 
-  /* HERO */
-  .hero {
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(13,13,13,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 56px;
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    cursor: pointer;
+  }
+
+  .nav-logo span { color: var(--red); }
+
+  .nav-links {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+  }
+
+  .nav-links li button {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.85rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .nav-links li button:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+  .nav-links li button.active { color: var(--gold); background: rgba(245,197,24,0.08); }
+
+  .nav-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--red);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+  /* ── PAGE SYSTEM ── */
+  .page {
+    display: none;
     min-height: 100vh;
+    padding-top: 56px;
+    animation: fadeSlideIn 0.4s ease;
+  }
+
+  .page.active { display: block; }
+
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SHARED ── */
+  .divider {
+    height: 3px;
+    background: linear-gradient(90deg, var(--black), var(--red), var(--gold), var(--red), var(--black));
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .btn-primary {
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    padding: 0.9rem 2rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--red-light); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    padding: 0.9rem 2rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover { border-color: var(--white); transform: translateY(-2px); }
+
+  /* ── PAGE 1: HOME ── */
+  .hero {
+    min-height: calc(100vh - 56px);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
-    padding: 3rem 2rem 6rem;
+    padding: 3rem 2rem 5rem;
     background: var(--black);
     overflow: hidden;
   }
@@ -56,20 +182,8 @@
     inset: 0;
     opacity: 0.04;
     background:
-      repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 59px,
-        rgba(255,255,255,0.6) 59px,
-        rgba(255,255,255,0.6) 60px
-      ),
-      repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 59px,
-        rgba(255,255,255,0.6) 59px,
-        rgba(255,255,255,0.6) 60px
-      );
+      repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.6) 59px, rgba(255,255,255,0.6) 60px),
+      repeating-linear-gradient(0deg,  transparent, transparent 59px, rgba(255,255,255,0.6) 59px, rgba(255,255,255,0.6) 60px);
   }
 
   .hero-badge {
@@ -96,7 +210,7 @@
     letter-spacing: 0.02em;
   }
 
-  .hero-title span.red { color: var(--red); }
+  .hero-title span.red  { color: var(--red); }
   .hero-title span.gold { color: var(--gold); }
 
   .hero-ball {
@@ -107,10 +221,7 @@
     animation: bounce 2s ease-in-out infinite;
   }
 
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
-  }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
 
   .hero-sub {
     font-size: clamp(0.9rem, 2.5vw, 1.1rem);
@@ -133,79 +244,16 @@
     justify-content: center;
   }
 
-  .btn-primary {
-    background: var(--red);
-    color: var(--white);
-    border: none;
-    padding: 0.9rem 2rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-  }
-
-  .btn-primary:hover { background: var(--red-light); transform: translateY(-2px); }
-
-  .btn-outline {
-    background: transparent;
-    color: var(--white);
-    border: 1.5px solid rgba(255,255,255,0.3);
-    padding: 0.9rem 2rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    transition: border-color 0.2s, transform 0.15s;
-  }
-
-  .btn-outline:hover { border-color: var(--white); transform: translateY(-2px); }
-
-  .scroll-hint {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    color: rgba(255,255,255,0.3);
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    z-index: 1;
-    animation: fadepulse 2.5s ease-in-out infinite;
-  }
-
-  @keyframes fadepulse {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.7; }
-  }
-
-  /* SCOREBORD */
-  .scoreboard {
+  /* scorebord strip under hero */
+  .score-strip {
     background: var(--off-black);
-    padding: 4rem 2rem;
-  }
-
-  .section-label {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    text-align: center;
-    margin-bottom: 2.5rem;
+    padding: 2.5rem 2rem;
+    border-top: 3px solid var(--red);
   }
 
   .score-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 1px;
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.06);
@@ -217,41 +265,41 @@
 
   .score-item {
     background: var(--off-black);
-    padding: 2rem 1.5rem;
+    padding: 1.75rem 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.4rem;
     text-align: center;
   }
 
-  .score-icon { font-size: 1.8rem; }
+  .score-icon { font-size: 1.6rem; }
 
   .score-value {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.2rem;
+    font-size: 2rem;
     color: var(--white);
     line-height: 1;
   }
 
-  .score-value.red { color: var(--red); }
+  .score-value.red  { color: var(--red); }
   .score-value.gold { color: var(--gold); }
 
   .score-label {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.45);
+    color: rgba(255,255,255,0.4);
   }
 
-  /* INFO SECTION */
-  .info-section {
-    padding: 5rem 2rem;
+  /* ── PAGE 2: INFO ── */
+  .info-page {
     background: var(--black);
-    max-width: 900px;
-    margin: 0 auto;
+    padding: 4rem 2rem;
   }
+
+  .info-inner { max-width: 900px; margin: 0 auto; }
 
   .info-grid {
     display: grid;
@@ -274,56 +322,115 @@
     text-transform: uppercase;
     color: var(--gold);
     margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
   }
 
   .info-card-body {
     font-size: 0.95rem;
-    line-height: 1.7;
+    line-height: 1.8;
     color: rgba(255,255,255,0.8);
   }
 
-  .info-card-body strong {
-    color: var(--white);
-    font-weight: 600;
+  .info-card-body strong { color: var(--white); font-weight: 600; }
+
+  .timeline {
+    margin-top: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  /* MEENEMEN */
-  .packing-section {
-    background: var(--red-dark);
-    padding: 5rem 2rem;
+  .timeline-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .tl-item {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    padding-bottom: 1.75rem;
     position: relative;
-    overflow: hidden;
   }
 
-  .packing-section::before {
-    content: '⚽';
+  .tl-item:not(:last-child)::after {
+    content: '';
     position: absolute;
-    font-size: 20rem;
-    opacity: 0.04;
-    right: -3rem;
-    top: -3rem;
-    line-height: 1;
+    left: 19px; top: 40px;
+    width: 2px;
+    bottom: 0;
+    background: rgba(255,255,255,0.08);
   }
 
-  .packing-inner {
-    max-width: 900px;
-    margin: 0 auto;
+  .tl-dot {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--red);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
     position: relative;
     z-index: 1;
   }
 
+  .tl-dot.gold-dot { background: var(--gold); }
+
+  .tl-content { padding-top: 0.5rem; }
+
+  .tl-day {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.25rem;
+  }
+
+  .tl-day.gold { color: var(--gold); }
+
+  .tl-desc {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.6;
+  }
+
+  .tl-desc strong { color: var(--white); }
+
+  /* ── PAGE 3: MEENEMEN ── */
+  .packing-page {
+    background: var(--red-dark);
+    min-height: calc(100vh - 56px);
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .packing-page::before {
+    content: '⚽';
+    position: absolute;
+    font-size: 22rem;
+    opacity: 0.04;
+    right: -4rem;
+    top: -2rem;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .packing-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+
   .packing-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
+    gap: 1.25rem;
     margin-top: 2rem;
   }
 
   .pack-category {
-    background: rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.22);
     border-radius: 0.5rem;
     padding: 1.5rem;
     border: 1px solid rgba(255,255,255,0.1);
@@ -336,17 +443,9 @@
     text-transform: uppercase;
     color: var(--gold);
     margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
   }
 
-  .pack-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
+  .pack-list { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
 
   .pack-list li {
     font-size: 0.875rem;
@@ -355,28 +454,46 @@
     align-items: flex-start;
     gap: 0.5rem;
     line-height: 1.4;
+    cursor: pointer;
+    transition: color 0.15s;
+    user-select: none;
   }
 
   .pack-list li::before {
-    content: '—';
+    content: '☐';
     color: var(--gold);
     flex-shrink: 0;
-    margin-top: 0.05em;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
+    margin-top: -0.05em;
+    transition: content 0.1s;
   }
 
-  /* INSCHRIJVEN */
-  .cta-section {
-    background: var(--black);
-    padding: 5rem 2rem;
+  .pack-list li.checked { color: rgba(255,255,255,0.35); text-decoration: line-through; }
+  .pack-list li.checked::before { content: '☑'; color: rgba(255,255,255,0.3); }
+
+  .pack-hint {
     text-align: center;
+    margin-top: 2rem;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.06em;
   }
 
-  .cta-inner { max-width: 600px; margin: 0 auto; }
+  /* ── PAGE 4: INSCHRIJVEN ── */
+  .cta-page {
+    background: var(--black);
+    min-height: calc(100vh - 56px);
+    padding: 5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cta-inner { max-width: 600px; width: 100%; text-align: center; }
 
   .cta-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(3rem, 8vw, 5rem);
+    font-size: clamp(3rem, 8vw, 5.5rem);
     line-height: 1;
     margin-bottom: 1rem;
   }
@@ -386,199 +503,416 @@
   .cta-sub {
     font-size: 1rem;
     color: rgba(255,255,255,0.6);
-    line-height: 1.7;
+    line-height: 1.8;
     margin-bottom: 2.5rem;
   }
 
-  .cta-contact {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
+  .cta-card {
     background: var(--off-black);
     border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 0.5rem;
-    padding: 1.25rem 2rem;
-    margin-bottom: 2.5rem;
-    font-size: 1rem;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    text-align: left;
   }
 
-  .cta-contact strong { color: var(--gold); }
+  .cta-card-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
 
-  /* FOOTER */
+  .cta-card-value {
+    font-size: 1.1rem;
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .cta-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    text-align: left;
+  }
+
+  .cta-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .cta-step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--red);
+    line-height: 1;
+    min-width: 2rem;
+  }
+
+  .cta-step-text {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+    padding-top: 0.35rem;
+  }
+
+  .cta-step-text strong { color: var(--white); }
+
+  .price-badge {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    background: rgba(200,16,46,0.15);
+    border: 1px solid rgba(200,16,46,0.3);
+    border-radius: 0.5rem;
+    padding: 1rem 1.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .price-amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--red);
+    line-height: 1;
+  }
+
+  .price-label {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── FOOTER ── */
   footer {
     background: var(--off-black);
     border-top: 1px solid rgba(255,255,255,0.06);
-    padding: 2rem;
+    padding: 1.5rem 2rem;
     text-align: center;
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.3);
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.25);
     letter-spacing: 0.05em;
   }
 
   footer span { color: var(--red); }
 
-  /* DIVIDER */
-  .divider {
-    height: 3px;
-    background: linear-gradient(90deg, var(--black), var(--red), var(--gold), var(--red), var(--black));
+  /* ── MOBILE NAV ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
   }
 
-  @media (max-width: 480px) {
-    .hero-title { font-size: 4.5rem; }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 56px; left: 0; right: 0;
+    background: rgba(13,13,13,0.97);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    z-index: 99;
+    padding: 1rem;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .mobile-menu.open { display: flex; }
+
+  .mobile-menu button {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.7);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.85rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .mobile-menu button:hover  { background: rgba(255,255,255,0.06); color: var(--white); }
+  .mobile-menu button.active { color: var(--gold); background: rgba(245,197,24,0.08); }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
     .score-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-title { font-size: 4.5rem; }
   }
 </style>
 </head>
 <body>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="pitch-lines"></div>
-  <div class="hero-badge">KLJ Kruibeke — +16 leiding</div>
-  <h1 class="hero-title">
-    <span class="red">WK</span><br>
-    WEEK<span class="gold">END</span>
-  </h1>
-  <div class="hero-ball">⚽</div>
-  <p class="hero-sub">26 – 28 juni 2025 · De Kievit, Roosendijk</p>
-  <div class="hero-cta">
-    <a href="#inschrijven" class="btn-primary">Inschrijven</a>
-    <a href="#info" class="btn-outline">Meer info</a>
-  </div>
-  <p class="scroll-hint">↓ scroll voor info</p>
-</section>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="goTo('home')"><span>WK</span> WEEKEND</div>
+  <ul class="nav-links">
+    <li><button onclick="goTo('home')"    id="nav-home"    class="active">Home</button></li>
+    <li><button onclick="goTo('info')"    id="nav-info"   >Info</button></li>
+    <li><button onclick="goTo('packing')" id="nav-packing">Meenemen</button></li>
+    <li><button onclick="goTo('signup')"  id="nav-signup" >Inschrijven</button></li>
+  </ul>
+  <div class="nav-dot" id="nav-dot"></div>
+  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobile()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-<div class="divider"></div>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <button onclick="goTo('home');toggleMobile()"    id="mob-home"    class="active">🏠 Home</button>
+  <button onclick="goTo('info');toggleMobile()"    id="mob-info"   >📋 Info</button>
+  <button onclick="goTo('packing');toggleMobile()" id="mob-packing">🎒 Meenemen</button>
+  <button onclick="goTo('signup');toggleMobile()"  id="mob-signup" >✍️ Inschrijven</button>
+</div>
 
-<!-- SCOREBORD -->
-<section class="scoreboard">
-  <p class="section-label">⚽ De details op een rij</p>
-  <div class="score-grid">
-    <div class="score-item">
-      <div class="score-icon">📅</div>
-      <div class="score-value">26–28</div>
-      <div class="score-label">Juni 2025</div>
+<!-- ══ PAGE: HOME ══ -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="pitch-lines"></div>
+    <div class="hero-badge">KLJ Kruibeke — +16 leiding</div>
+    <h1 class="hero-title">
+      <span class="red">WK</span><br>
+      WEEK<span class="gold">END</span>
+    </h1>
+    <div class="hero-ball">⚽</div>
+    <p class="hero-sub">26 – 28 juni 2025 · De Kievit, Roosendijk</p>
+    <div class="hero-cta">
+      <button class="btn-primary" onclick="goTo('signup')">Inschrijven</button>
+      <button class="btn-outline" onclick="goTo('info')">Meer info</button>
     </div>
-    <div class="score-item">
-      <div class="score-icon">🕢</div>
-      <div class="score-value red">19:30</div>
-      <div class="score-label">Vertrek vrijdag</div>
-    </div>
-    <div class="score-item">
-      <div class="score-icon">🏠</div>
-      <div class="score-value gold">Namiddag</div>
-      <div class="score-label">Terug zondag</div>
-    </div>
-    <div class="score-item">
-      <div class="score-icon">💶</div>
-      <div class="score-value">70€</div>
-      <div class="score-label">Prijs</div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- INFO -->
-<section class="info-section" id="info">
-  <p class="section-label">📋 Praktische info</p>
-  <div class="info-grid">
-    <div class="info-card">
-      <div class="info-card-title">📍 Locatie</div>
-      <div class="info-card-body">
-        <strong>De Kievit</strong><br>
-        Roosendijk 109 Bus A<br>
-        <br>
-        We verzamelen vrijdag om <strong>19:30</strong> aan het lokaal.
+  </section>
+  <div class="divider"></div>
+  <section class="score-strip">
+    <div class="score-grid">
+      <div class="score-item">
+        <div class="score-icon">📅</div>
+        <div class="score-value">26–28</div>
+        <div class="score-label">Juni 2025</div>
+      </div>
+      <div class="score-item">
+        <div class="score-icon">🕢</div>
+        <div class="score-value red">19:30</div>
+        <div class="score-label">Vertrek vrijdag</div>
+      </div>
+      <div class="score-item">
+        <div class="score-icon">🏠</div>
+        <div class="score-value gold">Namiddag</div>
+        <div class="score-label">Terug zondag</div>
+      </div>
+      <div class="score-item">
+        <div class="score-icon">💶</div>
+        <div class="score-value">70€</div>
+        <div class="score-label">Prijs</div>
       </div>
     </div>
-    <div class="info-card">
-      <div class="info-card-title">🗓️ Wanneer</div>
-      <div class="info-card-body">
-        <strong>Vrijdag 26 juni</strong> — vertrek 19:30 aan het lokaal<br><br>
-        <strong>Zondag 28 juni</strong> — terug namiddag (afhankelijk van het verkeer)
+  </section>
+  <footer><p>Met ❤️ van de <span>+16 leiding</span> · KLJ Kruibeke · WK Weekend 2025</p></footer>
+</div>
+
+<!-- ══ PAGE: INFO ══ -->
+<div class="page" id="page-info">
+  <section class="info-page">
+    <div class="info-inner">
+      <p class="section-label">📋 Praktische info</p>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-card-title">📍 Locatie</div>
+          <div class="info-card-body">
+            <strong>De Kievit</strong><br>
+            Roosendijk 109 Bus A<br><br>
+            We verzamelen vrijdag om <strong>19:30</strong> aan het lokaal.
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">💡 Goed om te weten</div>
+          <div class="info-card-body">
+            Breng max. <strong>één valies</strong> per persoon mee.<br><br>
+            Vragen? Stuur gerust een berichtje naar <strong>Jari</strong> of een andere leider.
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">💶 Prijs</div>
+          <div class="info-card-body">
+            Deelname kost <strong>70 euro</strong> per persoon.<br><br>
+            Meer info over betaling volgt na inschrijving.
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-title">🗓️ Programma</div>
+        <div class="tl-item">
+          <div class="tl-dot">📅</div>
+          <div class="tl-content">
+            <div class="tl-day">Vrijdag 26 juni</div>
+            <div class="tl-desc">Verzamelen om <strong>19:30</strong> aan het lokaal. We vertrekken samen naar De Kievit in Roosendijk.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">⚽</div>
+          <div class="tl-content">
+            <div class="tl-day">Zaterdag 27 juni</div>
+            <div class="tl-desc">Volledige WK-dag! Activiteiten, wedstrijden en natuurlijk voetbalsfeer van de bovenste plank.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot gold-dot">🏠</div>
+          <div class="tl-content">
+            <div class="tl-day gold">Zondag 28 juni</div>
+            <div class="tl-desc">Terug <strong>namiddag</strong>. Afhankelijk van het verkeer kan dit iets later uitlopen.</div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="info-card">
-      <div class="info-card-title">💡 Goed om te weten</div>
-      <div class="info-card-body">
-        Breng max. <strong>één valies</strong> per persoon mee.<br><br>
-        Vragen? Stuur gerust een berichtje naar <strong>Jari</strong> of een andere leider.
+  </section>
+  <footer><p>Met ❤️ van de <span>+16 leiding</span> · KLJ Kruibeke · WK Weekend 2025</p></footer>
+</div>
+
+<!-- ══ PAGE: MEENEMEN ══ -->
+<div class="page" id="page-packing">
+  <section class="packing-page">
+    <div class="packing-inner">
+      <p class="section-label" style="color:rgba(255,255,255,0.7);">🎒 Dit neem je mee</p>
+      <div class="packing-grid">
+        <div class="pack-category">
+          <div class="pack-category-title">🛏️ Slaapgerief</div>
+          <ul class="pack-list">
+            <li onclick="toggle(this)">Kussensloop</li>
+            <li onclick="toggle(this)">Hoeslaken</li>
+            <li onclick="toggle(this)">Slaapzak</li>
+            <li onclick="toggle(this)">Pyjama</li>
+            <li onclick="toggle(this)">Kussen</li>
+          </ul>
+        </div>
+        <div class="pack-category">
+          <div class="pack-category-title">👕 Kledij</div>
+          <ul class="pack-list">
+            <li onclick="toggle(this)">KLJ-kledij</li>
+            <li onclick="toggle(this)">Broeken, t-shirts, truien</li>
+            <li onclick="toggle(this)">Ondergoed &amp; kousen</li>
+            <li onclick="toggle(this)">Bottinnen &amp; waterschoenen</li>
+            <li onclick="toggle(this)">Zwemgerief</li>
+          </ul>
+        </div>
+        <div class="pack-category">
+          <div class="pack-category-title">🚿 Toiletgerief</div>
+          <ul class="pack-list">
+            <li onclick="toggle(this)">Shampoo &amp; douchegel</li>
+            <li onclick="toggle(this)">Handdoeken &amp; washandje</li>
+            <li onclick="toggle(this)">Tandenborstel &amp; tandpasta</li>
+          </ul>
+        </div>
+        <div class="pack-category">
+          <div class="pack-category-title">🎒 Extra</div>
+          <ul class="pack-list">
+            <li onclick="toggle(this)">Bril of lenzen</li>
+            <li onclick="toggle(this)">Zakdoeken</li>
+            <li onclick="toggle(this)">Medicatie</li>
+            <li onclick="toggle(this)">Zaklamp</li>
+            <li onclick="toggle(this)">Pollepel</li>
+          </ul>
+        </div>
       </div>
+      <p class="pack-hint">Tik op een item om het af te vinken ✓</p>
     </div>
-  </div>
-</section>
+  </section>
+  <footer style="background:rgba(0,0,0,0.3);border-top:1px solid rgba(255,255,255,0.06);">
+    <p>Met ❤️ van de <span>+16 leiding</span> · KLJ Kruibeke · WK Weekend 2025</p>
+  </footer>
+</div>
 
-<div class="divider"></div>
+<!-- ══ PAGE: INSCHRIJVEN ══ -->
+<div class="page" id="page-signup">
+  <section class="cta-page">
+    <div class="cta-inner">
+      <h2 class="cta-title">SCHRIJF JE <span>IN</span></h2>
+      <p class="cta-sub">Wil je mee op het WK weekend? Volg deze stappen en je staat op de lijst!</p>
 
-<!-- WAT MEENEMEN -->
-<section class="packing-section">
-  <div class="packing-inner">
-    <p class="section-label" style="color: rgba(255,255,255,0.7);">🎒 Dit neem je mee</p>
-    <div class="packing-grid">
-      <div class="pack-category">
-        <div class="pack-category-title">🛏️ Slaapgerief</div>
-        <ul class="pack-list">
-          <li>Kussensloop</li>
-          <li>Hoeslaken</li>
-          <li>Slaapzak</li>
-          <li>Pyjama</li>
-          <li>Kussen</li>
-        </ul>
+      <div class="price-badge">
+        <span class="price-amount">70€</span>
+        <span class="price-label">per persoon</span>
       </div>
-      <div class="pack-category">
-        <div class="pack-category-title">👕 Kledij</div>
-        <ul class="pack-list">
-          <li>KLJ-kledij</li>
-          <li>Broeken, t-shirts, truien</li>
-          <li>Ondergoed & kousen</li>
-          <li>Bottinnen & waterschoenen</li>
-          <li>Zwemgerief</li>
-        </ul>
+
+      <div class="cta-steps">
+        <div class="cta-step">
+          <div class="cta-step-num">1</div>
+          <div class="cta-step-text">Stuur een berichtje naar <strong>Jari</strong> met je naam om je in te schrijven.</div>
+        </div>
+        <div class="cta-step">
+          <div class="cta-step-num">2</div>
+          <div class="cta-step-text">Je ontvangt bevestiging en verdere info over betaling van de leiding.</div>
+        </div>
+        <div class="cta-step">
+          <div class="cta-step-num">3</div>
+          <div class="cta-step-text">Pak je tas in (zie de <button onclick="goTo('packing')" style="background:none;border:none;color:var(--gold);font-family:inherit;font-size:inherit;cursor:pointer;font-weight:600;text-decoration:underline;">meenemenlijst</button>) en geniet van het weekend! 🏆</div>
+        </div>
       </div>
-      <div class="pack-category">
-        <div class="pack-category-title">🚿 Toiletgerief</div>
-        <ul class="pack-list">
-          <li>Shampoo & douchegel</li>
-          <li>Handdoeken & washandje</li>
-          <li>Tandenborstel & tandpasta</li>
-        </ul>
+
+      <div class="cta-card">
+        <div class="cta-card-label">📍 Locatie</div>
+        <div class="cta-card-value">De Kievit — Roosendijk 109 Bus A</div>
       </div>
-      <div class="pack-category">
-        <div class="pack-category-title">🎒 Extra</div>
-        <ul class="pack-list">
-          <li>Bril of lenzen</li>
-          <li>Zakdoeken</li>
-          <li>Medicatie</li>
-          <li>Zaklamp</li>
-          <li>Pollepel</li>
-        </ul>
+      <div class="cta-card">
+        <div class="cta-card-label">🗓️ Datum</div>
+        <div class="cta-card-value">26 – 28 juni 2025 &nbsp;·&nbsp; vertrek 19:30 aan het lokaal</div>
       </div>
+
+      <p style="font-size:0.78rem;color:rgba(255,255,255,0.25);margin-top:1.5rem;">
+        Vragen? Neem contact op met de +16 leiding van KLJ Kruibeke.
+      </p>
     </div>
-  </div>
-</section>
+  </section>
+  <footer><p>Met ❤️ van de <span>+16 leiding</span> · KLJ Kruibeke · WK Weekend 2025</p></footer>
+</div>
 
-<div class="divider"></div>
+<script>
+  const pages = ['home','info','packing','signup'];
 
-<!-- INSCHRIJVEN -->
-<section class="cta-section" id="inschrijven">
-  <div class="cta-inner">
-    <h2 class="cta-title">SCHRIJF JE <span>IN</span></h2>
-    <p class="cta-sub">Wil je mee op het WK weekend? Stuur een berichtje naar Jari om je in te schrijven. Doe dit zo snel mogelijk!</p>
-    <div class="cta-contact">
-      📲 Stuur een bericht naar <strong>Jari</strong>
-    </div>
-    <br>
-    <p style="font-size: 0.8rem; color: rgba(255,255,255,0.3); margin-top: 1rem;">
-      Vragen? Neem contact op met de +16 leiding van KLJ Kruibeke.
-    </p>
-  </div>
-</section>
+  function goTo(id) {
+    pages.forEach(p => {
+      document.getElementById('page-' + p).classList.remove('active');
+      const btn    = document.getElementById('nav-' + p);
+      const mobBtn = document.getElementById('mob-' + p);
+      if (btn)    btn.classList.remove('active');
+      if (mobBtn) mobBtn.classList.remove('active');
+    });
+    document.getElementById('page-' + id).classList.add('active');
+    const btn    = document.getElementById('nav-' + id);
+    const mobBtn = document.getElementById('mob-' + id);
+    if (btn)    btn.classList.add('active');
+    if (mobBtn) mobBtn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
-<!-- FOOTER -->
-<footer>
-  <p>Met ❤️ van de <span>+16 leiding</span> · KLJ Kruibeke · WK Weekend 2025</p>
-</footer>
+  function toggleMobile() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
 
+  function toggle(el) {
+    el.classList.toggle('checked');
+  }
+</script>
 </body>
 </html>
