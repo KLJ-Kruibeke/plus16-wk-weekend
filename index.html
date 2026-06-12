@@ -176,6 +176,17 @@
   footer { background: var(--off-black); border-top: 1px solid rgba(255,255,255,0.06); padding: 1.5rem 2rem; text-align: center; font-size: 0.78rem; color: rgba(255,255,255,0.25); letter-spacing: 0.05em; }
   footer span { color: var(--red); }
 
+
+  /* LEIDING CARDS */
+  .cards-section { background: var(--off-black); padding: 4rem 2rem; }
+  .cards-inner { max-width: 1000px; margin: 0 auto; }
+  .cards-intro { text-align: center; color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.7; margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; justify-items: center; }
+  .fifa-card-wrap { display: flex; flex-direction: column; align-items: center; }
+  .fifa-card { width: 100%; max-width: 220px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.5); transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
+  .fifa-card:hover { transform: translateY(-6px) scale(1.03); box-shadow: 0 16px 48px rgba(245,197,24,0.2); }
+  .fifa-card img { width: 100%; display: block; }
+
   @media (max-width: 600px) {
     .nav-links { display: none; }
     .hamburger { display: flex; }
@@ -231,6 +242,27 @@
     </div>
   </section>
   
+  <div class="divider"></div>
+  <section class="cards-section">
+    <div class="cards-inner">
+      <p class="section-label">🃏 De teamcaptains</p>
+      <p class="cards-intro">Dit zijn de vier teamcaptains die jullie WK Weekend gaan begeleiden. Elk met hun eigen stats — wie heeft de hoogste rating?</p>
+      <div class="cards-grid">
+        <div class="fifa-card-wrap">
+          <div class="fifa-card"><img src="1.png" alt="Ben De Cock"></div>
+        </div>
+        <div class="fifa-card-wrap">
+          <div class="fifa-card"><img src="2.png" alt="Jari Van Landeghem"></div>
+        </div>
+        <div class="fifa-card-wrap">
+          <div class="fifa-card"><img src="3.png" alt="Mathis Volckerick"></div>
+        </div>
+        <div class="fifa-card-wrap">
+          <div class="fifa-card"><img src="4.png" alt="Seppe Illeghems"></div>
+        </div>
+      </div>
+    </div>
+  </section>
   <footer><p>Met veel liefde van de <span>+16 leiding</span> · KLJ Kruibeke · WK Weekend 2026</p></footer>
 </div>
 
@@ -256,7 +288,7 @@
         <div class="dag-title"><span>Zaterdag</span> <span class="dag-date">27 juni</span></div>
         <div class="moment">
           <div class="moment-time">Vroeg</div>
-          <div class="moment-card"><div class="moment-title">Activiteit</div><div class="moment-sub">Ter plaatse</div></div>
+          <div class="moment-card mystery"><div class="moment-title">Activiteit</div><div class="moment-sub">Ter plaatse</div><div class="mystery-badge">🎉 Verrassing</div></div>
         </div>
         <div class="moment">
           <div class="moment-time">09:00</div>
@@ -264,7 +296,7 @@
         </div>
         <div class="moment">
           <div class="moment-time">Voormiddag</div>
-          <div class="moment-card"><div class="moment-title">Activiteit</div><div class="moment-sub">Ter plaatse</div></div>
+          <div class="moment-card mystery"><div class="moment-title">Activiteit</div><div class="moment-sub">Ter plaatse</div><div class="mystery-badge">🎉 Verrassing</div></div>
         </div>
         <div class="moment">
           <div class="moment-time">Middag</div>
@@ -272,7 +304,7 @@
         </div>
         <div class="moment">
           <div class="moment-time">Namiddag</div>
-          <div class="moment-card"><div class="moment-title">Activiteit</div><div class="moment-sub">Niet ter plaatse</div></div>
+          <div class="moment-card mystery"><div class="moment-title">Activiteit</div><div class="moment-sub">Niet ter plaatse</div><div class="mystery-badge">🎉 Verrassing</div></div>
         </div>
         <div class="moment">
           <div class="moment-time">Avond</div>
@@ -280,7 +312,7 @@
         </div>
         <div class="moment">
           <div class="moment-time">Laat</div>
-          <div class="moment-card"><div class="moment-title">Activiteit</div><div class="moment-sub">Ter plaatse</div></div>
+          <div class="moment-card mystery"><div class="moment-title">Activiteit</div><div class="moment-sub">Ter plaatse</div><div class="mystery-badge">🎉 Verrassing</div></div>
         </div>
       </div>
 
@@ -292,7 +324,7 @@
         </div>
         <div class="moment">
           <div class="moment-time">Namiddag</div>
-          <div class="moment-card"><div class="moment-title">Activiteit</div><div class="moment-sub">Niet ter plaatse</div></div>
+          <div class="moment-card mystery"><div class="moment-title">Activiteit</div><div class="moment-sub">Niet ter plaatse</div><div class="mystery-badge">🎉 Verrassing</div></div>
         </div>
         <div class="moment">
           <div class="moment-time">~14:00</div>
