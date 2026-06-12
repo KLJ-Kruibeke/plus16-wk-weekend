@@ -13,646 +13,168 @@
     --red-dark: #9B0C22;
     --red-light: #E8334A;
     --gold: #F5C518;
-    --gold-dark: #C9A000;
     --black: #0D0D0D;
     --off-black: #1A1A1A;
     --white: #FFFFFF;
   }
 
-  html, body {
-    height: 100%;
-    font-family: 'Inter', sans-serif;
-    background: var(--black);
-    color: var(--white);
-    overflow-x: hidden;
-  }
+  html, body { height: 100%; font-family: 'Inter', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
 
-  /* ── NAV ── */
+  /* NAV */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    background: rgba(13,13,13,0.92);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(13,13,13,0.95); backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255,255,255,0.06);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 2rem;
-    height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 56px;
   }
-
-  .nav-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.3rem;
-    letter-spacing: 0.05em;
-    color: var(--white);
-    cursor: pointer;
-  }
-
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.05em; cursor: pointer; }
   .nav-logo span { color: var(--red); }
-
-  .nav-links {
-    display: flex;
-    gap: 0.25rem;
-    list-style: none;
-  }
-
+  .nav-links { display: flex; gap: 0.25rem; list-style: none; }
   .nav-links li button {
-    background: none;
-    border: none;
-    color: rgba(255,255,255,0.5);
-    font-family: 'Inter', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.4rem 0.85rem;
-    border-radius: 0.25rem;
-    cursor: pointer;
+    background: none; border: none; color: rgba(255,255,255,0.5);
+    font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.4rem 0.75rem; border-radius: 0.25rem; cursor: pointer;
     transition: color 0.2s, background 0.2s;
   }
-
   .nav-links li button:hover { color: var(--white); background: rgba(255,255,255,0.06); }
   .nav-links li button.active { color: var(--gold); background: rgba(245,197,24,0.08); }
-
-  .nav-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--red);
-    animation: pulse 2s ease-in-out infinite;
-  }
-
+  .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); animation: pulse 2s ease-in-out infinite; }
   @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
 
-  /* ── PAGE SYSTEM ── */
-  .page {
-    display: none;
-    min-height: 100vh;
-    padding-top: 56px;
-    animation: fadeSlideIn 0.4s ease;
-  }
+  /* HAMBURGER */
+  .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; }
+  .mobile-menu { display: none; position: fixed; top: 56px; left: 0; right: 0; background: rgba(13,13,13,0.97); border-bottom: 1px solid rgba(255,255,255,0.06); z-index: 99; padding: 1rem; flex-direction: column; gap: 0.25rem; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu button { background: none; border: none; color: rgba(255,255,255,0.7); font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.85rem 1rem; border-radius: 0.25rem; cursor: pointer; text-align: left; transition: background 0.15s, color 0.15s; }
+  .mobile-menu button:hover { background: rgba(255,255,255,0.06); color: var(--white); }
+  .mobile-menu button.active { color: var(--gold); background: rgba(245,197,24,0.08); }
 
+  /* PAGES */
+  .page { display: none; min-height: 100vh; padding-top: 56px; animation: fadeIn 0.35s ease; }
   .page.active { display: block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
 
-  @keyframes fadeSlideIn {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ── SHARED ── */
-  .divider {
-    height: 3px;
-    background: linear-gradient(90deg, var(--black), var(--red), var(--gold), var(--red), var(--black));
-  }
-
-  .section-label {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    text-align: center;
-    margin-bottom: 2.5rem;
-  }
-
-  .btn-primary {
-    background: var(--red);
-    color: var(--white);
-    border: none;
-    padding: 0.9rem 2rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-    display: inline-block;
-  }
-
+  /* SHARED */
+  .divider { height: 3px; background: linear-gradient(90deg, var(--black), var(--red), var(--gold), var(--red), var(--black)); }
+  .section-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); text-align: center; margin-bottom: 2.5rem; }
+  .btn-primary { background: var(--red); color: var(--white); border: none; padding: 0.9rem 2rem; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; border-radius: 0.25rem; cursor: pointer; transition: background 0.2s, transform 0.15s; display: inline-block; }
   .btn-primary:hover { background: var(--red-light); transform: translateY(-2px); }
-
-  .btn-outline {
-    background: transparent;
-    color: var(--white);
-    border: 1.5px solid rgba(255,255,255,0.3);
-    padding: 0.9rem 2rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    transition: border-color 0.2s, transform 0.15s;
-    display: inline-block;
-  }
-
+  .btn-outline { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,0.3); padding: 0.9rem 2rem; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; border-radius: 0.25rem; cursor: pointer; transition: border-color 0.2s, transform 0.15s; display: inline-block; }
   .btn-outline:hover { border-color: var(--white); transform: translateY(-2px); }
 
-  /* ── PAGE 1: HOME ── */
-  .hero {
-    min-height: calc(100vh - 56px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    padding: 3rem 2rem 5rem;
-    background: var(--black);
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,16,46,0.25) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 40% at 80% 80%, rgba(245,197,24,0.08) 0%, transparent 60%);
-  }
-
-  .pitch-lines {
-    position: absolute;
-    inset: 0;
-    opacity: 0.04;
-    background:
-      repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.6) 59px, rgba(255,255,255,0.6) 60px),
-      repeating-linear-gradient(0deg,  transparent, transparent 59px, rgba(255,255,255,0.6) 59px, rgba(255,255,255,0.6) 60px);
-  }
-
-  .hero-badge {
-    background: var(--red);
-    color: var(--white);
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 0.4rem 1.2rem;
-    border-radius: 2rem;
-    margin-bottom: 1.5rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(4.5rem, 16vw, 10rem);
-    line-height: 0.9;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-    letter-spacing: 0.02em;
-  }
-
-  .hero-title span.red  { color: var(--red); }
+  /* HOME */
+  .hero { min-height: calc(100vh - 56px); display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; padding: 3rem 2rem 5rem; background: var(--black); overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,16,46,0.25) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 80% 80%, rgba(245,197,24,0.08) 0%, transparent 60%); }
+  .pitch-lines { position: absolute; inset: 0; opacity: 0.04; background: repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.6) 59px, rgba(255,255,255,0.6) 60px), repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,0.6) 59px, rgba(255,255,255,0.6) 60px); }
+  .hero-badge { background: var(--red); color: var(--white); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.4rem 1.2rem; border-radius: 2rem; margin-bottom: 1.5rem; position: relative; z-index: 1; }
+  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4.5rem, 16vw, 10rem); line-height: 0.9; text-align: center; position: relative; z-index: 1; letter-spacing: 0.02em; }
+  .hero-title span.red { color: var(--red); }
   .hero-title span.gold { color: var(--gold); }
-
-  .hero-ball {
-    font-size: clamp(3rem, 8vw, 5rem);
-    margin: 1rem 0;
-    position: relative;
-    z-index: 1;
-    animation: bounce 2s ease-in-out infinite;
-  }
-
+  .hero-ball { font-size: clamp(3rem, 8vw, 5rem); margin: 1rem 0; position: relative; z-index: 1; animation: bounce 2s ease-in-out infinite; }
   @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+  .hero-sub { font-size: clamp(0.9rem, 2.5vw, 1.1rem); color: rgba(255,255,255,0.6); text-align: center; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.5rem; position: relative; z-index: 1; }
+  .hero-cta { margin-top: 2.5rem; position: relative; z-index: 1; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
 
-  .hero-sub {
-    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-    color: rgba(255,255,255,0.6);
-    text-align: center;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-top: 0.5rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-cta {
-    margin-top: 2.5rem;
-    position: relative;
-    z-index: 1;
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  /* scorebord strip under hero */
-  .score-strip {
-    background: var(--off-black);
-    padding: 2.5rem 2rem;
-    border-top: 3px solid var(--red);
-  }
-
-  .score-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 1px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 0.5rem;
-    overflow: hidden;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .score-item {
-    background: var(--off-black);
-    padding: 1.75rem 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.4rem;
-    text-align: center;
-  }
-
+  .score-strip { background: var(--off-black); padding: 2.5rem 2rem; border-top: 3px solid var(--red); }
+  .score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06); border-radius: 0.5rem; overflow: hidden; max-width: 900px; margin: 0 auto; }
+  .score-item { background: var(--off-black); padding: 1.75rem 1rem; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; text-align: center; }
   .score-icon { font-size: 1.6rem; }
-
-  .score-value {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    color: var(--white);
-    line-height: 1;
-  }
-
-  .score-value.red  { color: var(--red); }
+  .score-value { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--white); line-height: 1; }
+  .score-value.red { color: var(--red); }
   .score-value.gold { color: var(--gold); }
+  .score-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
 
-  .score-label {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
-  }
+  /* LEIDING CARDS */
+  .leiding-strip { background: var(--black); padding: 2.5rem 2rem; }
+  .leiding-grid { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; max-width: 500px; margin: 0 auto; }
+  .leiding-card { background: var(--off-black); border: 1px solid rgba(255,255,255,0.07); border-radius: 0.5rem; padding: 1.25rem 1.75rem; text-align: center; flex: 1; min-width: 140px; }
+  .leiding-avatar { width: 52px; height: 52px; border-radius: 50%; background: var(--red); display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; margin: 0 auto 0.75rem; }
+  .leiding-name { font-weight: 600; font-size: 0.95rem; }
+  .leiding-role { font-size: 0.72rem; color: var(--gold); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.25rem; }
 
-  /* ── PAGE 2: INFO ── */
-  .info-page {
-    background: var(--black);
-    padding: 4rem 2rem;
-  }
-
+  /* INFO PAGE */
+  .info-page { background: var(--black); padding: 4rem 2rem; }
   .info-inner { max-width: 900px; margin: 0 auto; }
-
-  .info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-  }
-
-  .info-card {
-    background: var(--off-black);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 0.5rem;
-    padding: 1.75rem;
-  }
-
-  .info-card-title {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1rem;
-  }
-
-  .info-card-body {
-    font-size: 0.95rem;
-    line-height: 1.8;
-    color: rgba(255,255,255,0.8);
-  }
-
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+  .info-card { background: var(--off-black); border: 1px solid rgba(255,255,255,0.07); border-radius: 0.5rem; padding: 1.75rem; }
+  .info-card-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+  .info-card-body { font-size: 0.95rem; line-height: 1.8; color: rgba(255,255,255,0.8); }
   .info-card-body strong { color: var(--white); font-weight: 600; }
+  .info-card-body a { color: var(--gold); text-decoration: none; }
+  .info-card-body a:hover { text-decoration: underline; }
 
-  .timeline {
-    margin-top: 3rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .timeline-title {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
-
-  .tl-item {
-    display: flex;
-    gap: 1.25rem;
-    align-items: flex-start;
-    padding-bottom: 1.75rem;
-    position: relative;
-  }
-
-  .tl-item:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    left: 19px; top: 40px;
-    width: 2px;
-    bottom: 0;
-    background: rgba(255,255,255,0.08);
-  }
-
-  .tl-dot {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    background: var(--red);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1rem;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1;
-  }
-
+  .timeline { margin-top: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .timeline-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; text-align: center; }
+  .tl-item { display: flex; gap: 1.25rem; align-items: flex-start; padding-bottom: 1.75rem; position: relative; }
+  .tl-item:not(:last-child)::after { content: ''; position: absolute; left: 19px; top: 40px; width: 2px; bottom: 0; background: rgba(255,255,255,0.08); }
+  .tl-dot { width: 40px; height: 40px; border-radius: 50%; background: var(--red); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; position: relative; z-index: 1; }
   .tl-dot.gold-dot { background: var(--gold); }
-
   .tl-content { padding-top: 0.5rem; }
-
-  .tl-day {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 0.25rem;
-  }
-
+  .tl-day { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--red); margin-bottom: 0.25rem; }
   .tl-day.gold { color: var(--gold); }
-
-  .tl-desc {
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.75);
-    line-height: 1.6;
-  }
-
+  .tl-desc { font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6; }
   .tl-desc strong { color: var(--white); }
 
-  /* ── PAGE 3: MEENEMEN ── */
-  .packing-page {
-    background: var(--red-dark);
-    min-height: calc(100vh - 56px);
-    padding: 4rem 2rem;
-    position: relative;
-    overflow: hidden;
-  }
+  /* PROGRAMMA PAGE */
+  .programma-page { background: var(--black); padding: 4rem 2rem; }
+  .programma-inner { max-width: 800px; margin: 0 auto; }
 
-  .packing-page::before {
-    content: '⚽';
-    position: absolute;
-    font-size: 22rem;
-    opacity: 0.04;
-    right: -4rem;
-    top: -2rem;
-    line-height: 1;
-    pointer-events: none;
-  }
+  .dag-block { margin-bottom: 2.5rem; }
+  .dag-title { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--white); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
+  .dag-title span { color: var(--red); }
+  .dag-title .dag-date { font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-left: auto; }
 
+  .moment { display: flex; gap: 1rem; margin-bottom: 0.75rem; align-items: flex-start; }
+  .moment-time { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; color: var(--gold); min-width: 60px; padding-top: 0.2rem; white-space: nowrap; }
+  .moment-card { background: var(--off-black); border: 1px solid rgba(255,255,255,0.07); border-radius: 0.4rem; padding: 0.75rem 1rem; flex: 1; }
+  .moment-card.mystery { border-color: rgba(200,16,46,0.3); background: rgba(200,16,46,0.06); }
+  .moment-title { font-size: 0.9rem; font-weight: 600; color: var(--white); margin-bottom: 0.2rem; }
+  .moment-sub { font-size: 0.78rem; color: rgba(255,255,255,0.45); }
+  .mystery-badge { display: inline-flex; align-items: center; gap: 0.3rem; background: rgba(200,16,46,0.15); border: 1px solid rgba(200,16,46,0.3); border-radius: 0.25rem; padding: 0.2rem 0.5rem; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--red); margin-top: 0.3rem; }
+
+  /* MEENEMEN */
+  .packing-page { background: var(--red-dark, #9B0C22); min-height: calc(100vh - 56px); padding: 4rem 2rem; position: relative; overflow: hidden; }
+  .packing-page::before { content: '⚽'; position: absolute; font-size: 22rem; opacity: 0.04; right: -4rem; top: -2rem; line-height: 1; pointer-events: none; }
   .packing-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
-
-  .packing-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.25rem;
-    margin-top: 2rem;
-  }
-
-  .pack-category {
-    background: rgba(0,0,0,0.22);
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    border: 1px solid rgba(255,255,255,0.1);
-  }
-
-  .pack-category-title {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1rem;
-  }
-
+  .packing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; margin-top: 2rem; }
+  .pack-category { background: rgba(0,0,0,0.22); border-radius: 0.5rem; padding: 1.5rem; border: 1px solid rgba(255,255,255,0.1); }
+  .pack-category-title { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
   .pack-list { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
-
-  .pack-list li {
-    font-size: 0.875rem;
-    color: rgba(255,255,255,0.85);
-    display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
-    line-height: 1.4;
-    cursor: pointer;
-    transition: color 0.15s;
-    user-select: none;
-  }
-
-  .pack-list li::before {
-    content: '☐';
-    color: var(--gold);
-    flex-shrink: 0;
-    font-size: 0.9rem;
-    margin-top: -0.05em;
-    transition: content 0.1s;
-  }
-
+  .pack-list li { font-size: 0.875rem; color: rgba(255,255,255,0.85); display: flex; align-items: flex-start; gap: 0.5rem; line-height: 1.4; cursor: pointer; transition: color 0.15s; user-select: none; }
+  .pack-list li::before { content: '☐'; color: var(--gold); flex-shrink: 0; font-size: 0.9rem; margin-top: -0.05em; }
   .pack-list li.checked { color: rgba(255,255,255,0.35); text-decoration: line-through; }
   .pack-list li.checked::before { content: '☑'; color: rgba(255,255,255,0.3); }
+  .pack-progress { margin-top: 2rem; max-width: 400px; margin-left: auto; margin-right: auto; text-align: center; }
+  .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-top: 0.75rem; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--gold); border-radius: 3px; transition: width 0.3s ease; width: 0%; }
+  .progress-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); letter-spacing: 0.06em; }
+  .pack-hint { text-align: center; margin-top: 1rem; font-size: 0.75rem; color: rgba(255,255,255,0.35); letter-spacing: 0.06em; }
 
-  .pack-hint {
-    text-align: center;
-    margin-top: 2rem;
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.35);
-    letter-spacing: 0.06em;
-  }
-
-  /* ── PAGE 4: INSCHRIJVEN ── */
-  .cta-page {
-    background: var(--black);
-    min-height: calc(100vh - 56px);
-    padding: 5rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
+  /* INSCHRIJVEN */
+  .cta-page { background: var(--black); min-height: calc(100vh - 56px); padding: 5rem 2rem; display: flex; align-items: center; justify-content: center; }
   .cta-inner { max-width: 600px; width: 100%; text-align: center; }
-
-  .cta-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(3rem, 8vw, 5.5rem);
-    line-height: 1;
-    margin-bottom: 1rem;
-  }
-
+  .cta-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 8vw, 5.5rem); line-height: 1; margin-bottom: 1rem; }
   .cta-title span { color: var(--red); }
-
-  .cta-sub {
-    font-size: 1rem;
-    color: rgba(255,255,255,0.6);
-    line-height: 1.8;
-    margin-bottom: 2.5rem;
-  }
-
-  .cta-card {
-    background: var(--off-black);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 0.75rem;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    text-align: left;
-  }
-
-  .cta-card-label {
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.75rem;
-  }
-
-  .cta-card-value {
-    font-size: 1.1rem;
-    color: var(--white);
-    font-weight: 600;
-  }
-
-  .cta-steps {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 2.5rem;
-    text-align: left;
-  }
-
-  .cta-step {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-
-  .cta-step-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    color: var(--red);
-    line-height: 1;
-    min-width: 2rem;
-  }
-
-  .cta-step-text {
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.7);
-    line-height: 1.6;
-    padding-top: 0.35rem;
-  }
-
+  .cta-sub { font-size: 1rem; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 2.5rem; }
+  .cta-card { background: var(--off-black); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1rem; text-align: left; }
+  .cta-card-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+  .cta-card-value { font-size: 1rem; color: var(--white); font-weight: 600; }
+  .cta-card-value.mono { font-family: monospace; font-size: 1.1rem; letter-spacing: 0.05em; color: var(--gold); }
+  .cta-steps { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; text-align: left; }
+  .cta-step { display: flex; align-items: flex-start; gap: 1rem; }
+  .cta-step-num { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--red); line-height: 1; min-width: 2rem; }
+  .cta-step-text { font-size: 0.9rem; color: rgba(255,255,255,0.7); line-height: 1.6; padding-top: 0.35rem; }
   .cta-step-text strong { color: var(--white); }
+  .price-badge { display: inline-flex; align-items: baseline; gap: 0.4rem; background: rgba(200,16,46,0.15); border: 1px solid rgba(200,16,46,0.3); border-radius: 0.5rem; padding: 1rem 1.75rem; margin-bottom: 2rem; }
+  .price-amount { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--red); line-height: 1; }
+  .price-label { font-size: 0.8rem; color: rgba(255,255,255,0.5); font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
 
-  .price-badge {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0.4rem;
-    background: rgba(200,16,46,0.15);
-    border: 1px solid rgba(200,16,46,0.3);
-    border-radius: 0.5rem;
-    padding: 1rem 1.75rem;
-    margin-bottom: 2rem;
-  }
-
-  .price-amount {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 3rem;
-    color: var(--red);
-    line-height: 1;
-  }
-
-  .price-label {
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.5);
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--off-black);
-    border-top: 1px solid rgba(255,255,255,0.06);
-    padding: 1.5rem 2rem;
-    text-align: center;
-    font-size: 0.78rem;
-    color: rgba(255,255,255,0.25);
-    letter-spacing: 0.05em;
-  }
-
+  /* FOOTER */
+  footer { background: var(--off-black); border-top: 1px solid rgba(255,255,255,0.06); padding: 1.5rem 2rem; text-align: center; font-size: 0.78rem; color: rgba(255,255,255,0.25); letter-spacing: 0.05em; }
   footer span { color: var(--red); }
-
-  /* ── MOBILE NAV ── */
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px;
-  }
-
-  .hamburger span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: var(--white);
-    border-radius: 2px;
-    transition: transform 0.2s, opacity 0.2s;
-  }
-
-  .mobile-menu {
-    display: none;
-    position: fixed;
-    top: 56px; left: 0; right: 0;
-    background: rgba(13,13,13,0.97);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    z-index: 99;
-    padding: 1rem;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .mobile-menu.open { display: flex; }
-
-  .mobile-menu button {
-    background: none;
-    border: none;
-    color: rgba(255,255,255,0.7);
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.85rem 1rem;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    text-align: left;
-    transition: background 0.15s, color 0.15s;
-  }
-
-  .mobile-menu button:hover  { background: rgba(255,255,255,0.06); color: var(--white); }
-  .mobile-menu button.active { color: var(--gold); background: rgba(245,197,24,0.08); }
 
   @media (max-width: 600px) {
     .nav-links { display: none; }
@@ -664,74 +186,129 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo" onclick="goTo('home')"><span>WK</span> WEEKEND</div>
   <ul class="nav-links">
-    <li><button onclick="goTo('home')"    id="nav-home"    class="active">Home</button></li>
-    <li><button onclick="goTo('info')"    id="nav-info"   >Info</button></li>
-    <li><button onclick="goTo('packing')" id="nav-packing">Meenemen</button></li>
-    <li><button onclick="goTo('signup')"  id="nav-signup" >Inschrijven</button></li>
+    <li><button onclick="goTo('home')"      id="nav-home"      class="active">Home</button></li>
+    <li><button onclick="goTo('programma')" id="nav-programma">Programma</button></li>
+    <li><button onclick="goTo('info')"      id="nav-info"      >Info</button></li>
+    <li><button onclick="goTo('packing')"   id="nav-packing"   >Meenemen</button></li>
+    <li><button onclick="goTo('signup')"    id="nav-signup"    >Inschrijven</button></li>
   </ul>
-  <div class="nav-dot" id="nav-dot"></div>
-  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobile()">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav-dot"></div>
+  <button class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobile-menu">
-  <button onclick="goTo('home');toggleMobile()"    id="mob-home"    class="active">🏠 Home</button>
-  <button onclick="goTo('info');toggleMobile()"    id="mob-info"   >📋 Info</button>
-  <button onclick="goTo('packing');toggleMobile()" id="mob-packing">🎒 Meenemen</button>
-  <button onclick="goTo('signup');toggleMobile()"  id="mob-signup" >✍️ Inschrijven</button>
+  <button onclick="goTo('home');toggleMobile()"      id="mob-home"      class="active">🏠 Home</button>
+  <button onclick="goTo('programma');toggleMobile()" id="mob-programma">📅 Programma</button>
+  <button onclick="goTo('info');toggleMobile()"      id="mob-info"      >📋 Info</button>
+  <button onclick="goTo('packing');toggleMobile()"   id="mob-packing"   >🎒 Meenemen</button>
+  <button onclick="goTo('signup');toggleMobile()"    id="mob-signup"    >✍️ Inschrijven</button>
 </div>
 
-<!-- ══ PAGE: HOME ══ -->
+<!-- HOME -->
 <div class="page active" id="page-home">
   <section class="hero">
     <div class="pitch-lines"></div>
     <div class="hero-badge">KLJ Kruibeke +16 Weekend</div>
-    <h1 class="hero-title">
-      <span class="red">WK</span><br>
-      WEEK<span class="gold">END</span>
-    </h1>
+    <h1 class="hero-title"><span class="red">WK</span><br>WEEK<span class="gold">END</span></h1>
     <div class="hero-ball">⚽</div>
     <p class="hero-sub">26 – 28 juni 2026 · De Kievit, Roosendijk</p>
     <div class="hero-cta">
       <button class="btn-primary" onclick="goTo('signup')">Inschrijven</button>
-      <button class="btn-outline" onclick="goTo('info')">Meer info</button>
+      <button class="btn-outline" onclick="goTo('programma')">Programma</button>
     </div>
   </section>
   <div class="divider"></div>
   <section class="score-strip">
     <div class="score-grid">
-      <div class="score-item">
-        <div class="score-icon">📅</div>
-        <div class="score-value">26–28</div>
-        <div class="score-label">Juni 2025</div>
+      <div class="score-item"><div class="score-icon">📅</div><div class="score-value">26–28</div><div class="score-label">Juni 2026</div></div>
+      <div class="score-item"><div class="score-icon">🕢</div><div class="score-value red">19:30</div><div class="score-label">Vertrek vrijdag</div></div>
+      <div class="score-item"><div class="score-icon">🏠</div><div class="score-value gold">Namiddag</div><div class="score-label">Terug zondag</div></div>
+      <div class="score-item"><div class="score-icon">💶</div><div class="score-value">70€</div><div class="score-label">Per persoon</div></div>
+      
+    </div>
+  </section>
+  
+  <footer><p>Met veel liefde van de <span>+16 leiding</span> · KLJ Kruibeke · WK Weekend 2026</p></footer>
+</div>
+
+<!-- PROGRAMMA -->
+<div class="page" id="page-programma">
+  <section class="programma-page">
+    <div class="programma-inner">
+      <p class="section-label">📅 Het programma</p>
+
+      <div class="dag-block">
+        <div class="dag-title"><span>Vrijdag</span> avond <span class="dag-date">26 juni</span></div>
+        <div class="moment">
+          <div class="moment-time">19:30</div>
+          <div class="moment-card"><div class="moment-title">Vertrek aan het lokaal</div><div class="moment-sub">We rijden samen naar De Kievit in Roosendijk</div></div>
+        </div>
+        <div class="moment">
+          <div class="moment-time">Aankomst</div>
+          <div class="moment-card mystery"><div class="moment-title">Installeren & eerste activiteit 🔒</div><div class="mystery-badge">🕵️ Verrassing</div></div>
+        </div>
       </div>
-      <div class="score-item">
-        <div class="score-icon">🕢</div>
-        <div class="score-value red">19:30</div>
-        <div class="score-label">Vertrek vrijdag</div>
+
+      <div class="dag-block">
+        <div class="dag-title"><span>Zaterdag</span> <span class="dag-date">27 juni</span></div>
+        <div class="moment">
+          <div class="moment-time">Vroeg</div>
+          <div class="moment-card"><div class="moment-title">Activiteit</div><div class="moment-sub">Ter plaatse</div></div>
+        </div>
+        <div class="moment">
+          <div class="moment-time">09:00</div>
+          <div class="moment-card"><div class="moment-title">Ontbijt</div><div class="moment-sub">Lekker starten voor een drukke dag</div></div>
+        </div>
+        <div class="moment">
+          <div class="moment-time">Voormiddag</div>
+          <div class="moment-card"><div class="moment-title">Activiteit</div><div class="moment-sub">Ter plaatse</div></div>
+        </div>
+        <div class="moment">
+          <div class="moment-time">Middag</div>
+          <div class="moment-card"><div class="moment-title">Lunch — Croque monsieurs</div><div class="moment-sub">Goed eten voor de namiddag</div></div>
+        </div>
+        <div class="moment">
+          <div class="moment-time">Namiddag</div>
+          <div class="moment-card"><div class="moment-title">Activiteit</div><div class="moment-sub">Niet ter plaatse</div></div>
+        </div>
+        <div class="moment">
+          <div class="moment-time">Avond</div>
+          <div class="moment-card"><div class="moment-title">BBQ</div><div class="moment-sub">Avondeten aan het vuur</div></div>
+        </div>
+        <div class="moment">
+          <div class="moment-time">Laat</div>
+          <div class="moment-card"><div class="moment-title">Activiteit</div><div class="moment-sub">Ter plaatse</div></div>
+        </div>
       </div>
-      <div class="score-item">
-        <div class="score-icon">🏠</div>
-        <div class="score-value gold">Namiddag</div>
-        <div class="score-label">Terug zondag</div>
-      </div>
-      <div class="score-item">
-        <div class="score-icon">💶</div>
-        <div class="score-value">70€</div>
-        <div class="score-label">Prijs</div>
+
+      <div class="dag-block">
+        <div class="dag-title"><span style="color:var(--gold)">Zondag</span> <span class="dag-date">28 juni</span></div>
+        <div class="moment">
+          <div class="moment-time">11:00</div>
+          <div class="moment-card"><div class="moment-title">Brunch</div><div class="moment-sub">Uitgebreid ontbijt voor de terugweg</div></div>
+        </div>
+        <div class="moment">
+          <div class="moment-time">Namiddag</div>
+          <div class="moment-card"><div class="moment-title">Activiteit</div><div class="moment-sub">Niet ter plaatse</div></div>
+        </div>
+        <div class="moment">
+          <div class="moment-time">~14:00</div>
+          <div class="moment-card"><div class="moment-title">Opruimen & vertrek</div><div class="moment-sub">Huisje proper achterlaten</div></div>
+        </div>
+        <div class="moment">
+          <div class="moment-time">~16:00</div>
+          <div class="moment-card" style="border-color:rgba(245,197,24,0.3);background:rgba(245,197,24,0.05)"><div class="moment-title" style="color:var(--gold)">Terugkeer 🏠</div><div class="moment-sub">Afhankelijk van het verkeer</div></div>
+        </div>
       </div>
     </div>
   </section>
   <footer><p>Met veel liefde van de <span>+16 leiding</span> · KLJ Kruibeke · WK Weekend 2026</p></footer>
 </div>
 
-<!-- ══ PAGE: INFO ══ -->
+<!-- INFO -->
 <div class="page" id="page-info">
   <section class="info-page">
     <div class="info-inner">
@@ -742,60 +319,53 @@
           <div class="info-card-body">
             <strong>De Kievit</strong><br>
             Roosendijk 109 Bus A<br><br>
-            We verzamelen vrijdag om <strong>19:30</strong> aan het lokaal.
+            <a href="https://www.kampas.be/nl/verblijf/de-kievit-1" target="_blank">Bekijk het verblijf →</a>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">🗓️ Wanneer</div>
+          <div class="info-card-body">
+            <strong>Vrijdag 26 juni</strong> — vertrek 19:30 aan het lokaal<br><br>
+            <strong>Zondag 28 juni</strong> — terug rond 16:00 (afhankelijk van het verkeer)
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">👥 Leiding</div>
+          <div class="info-card-body">
+            <strong>Jari</strong> — stamhoofd & uitnodiging<br><br>
+            <strong>Mathis</strong> — activiteiten & huisje<br><br>
+            <strong>Ben</strong> — verslag
           </div>
         </div>
         <div class="info-card">
           <div class="info-card-title">💡 Goed om te weten</div>
           <div class="info-card-body">
             Breng max. <strong>één valies</strong> per persoon mee.<br><br>
-            Vragen? Stuur gerust een berichtje naar <strong>Jari</strong> of een andere leider.
-          </div>
-        </div>
-        <div class="info-card">
-          <div class="info-card-title">💶 Prijs</div>
-          <div class="info-card-body">
-            Deelname kost <strong>70 euro</strong> per persoon.<br><br>
-            Overschrijven naar KLJ Kruibeke · BE56 7376 1201 6388
+            Bekijk de activiteitenlijst voor eventuele benodigdheden.
           </div>
         </div>
       </div>
-
-      <div class="timeline">
-        <div class="timeline-title">🗓️ Programma</div>
-        <div class="tl-item">
-          <div class="tl-dot">📅</div>
-          <div class="tl-content">
-            <div class="tl-day">Vrijdag 26 juni</div>
-            <div class="tl-desc">Verzamelen om <strong>19:30</strong> aan het lokaal. We vertrekken samen naar De Kievit in Roosendijk.</div>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot">⚽</div>
-          <div class="tl-content">
-            <div class="tl-day">Zaterdag 27 juni</div>
-            <div class="tl-desc">Volledige WK-dag! Activiteiten, wedstrijden en natuurlijk voetbalsfeer van de bovenste plank.</div>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot gold-dot">🏠</div>
-          <div class="tl-content">
-            <div class="tl-day gold">Zondag 28 juni</div>
-            <div class="tl-desc">Terug <strong>namiddag</strong>. Afhankelijk van het verkeer kan dit iets later uitlopen.</div>
-          </div>
-        </div>
+      <div class="timeline" style="margin-top:3rem">
+        <div class="timeline-title">🗓️ Op een rij</div>
+        <div class="tl-item"><div class="tl-dot">📅</div><div class="tl-content"><div class="tl-day">Vrijdag 26 juni</div><div class="tl-desc">Vertrek om <strong>19:30</strong> aan het lokaal richting De Kievit.</div></div></div>
+        <div class="tl-item"><div class="tl-dot">⚽</div><div class="tl-content"><div class="tl-day">Zaterdag 27 juni</div><div class="tl-desc">Volle dag met activiteiten, eten en WK-sfeer.</div></div></div>
+        <div class="tl-item"><div class="tl-dot gold-dot">🏠</div><div class="tl-content"><div class="tl-day gold">Zondag 28 juni</div><div class="tl-desc">Brunch om 11u, opruimen, en terug rond <strong>16:00</strong>.</div></div></div>
       </div>
     </div>
   </section>
   <footer><p>Met veel liefde van de <span>+16 leiding</span> · KLJ Kruibeke · WK Weekend 2026</p></footer>
 </div>
 
-<!-- ══ PAGE: MEENEMEN ══ -->
+<!-- MEENEMEN -->
 <div class="page" id="page-packing">
   <section class="packing-page">
     <div class="packing-inner">
       <p class="section-label" style="color:rgba(255,255,255,0.7);">🎒 Dit neem je mee</p>
-      <div class="packing-grid">
+      <div class="pack-progress">
+        <div class="progress-label" id="progress-text">0 van 21 ingepakt</div>
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      </div>
+      <div class="packing-grid" style="margin-top:1.5rem">
         <div class="pack-category">
           <div class="pack-category-title">🛏️ Slaapgerief</div>
           <ul class="pack-list">
@@ -843,66 +413,53 @@
   </footer>
 </div>
 
-<!-- ══ PAGE: INSCHRIJVEN ══ -->
+<!-- INSCHRIJVEN -->
 <div class="page" id="page-signup">
   <section class="cta-page">
     <div class="cta-inner">
       <h2 class="cta-title">SCHRIJF JE <span>IN</span></h2>
-      <p class="cta-sub">Wil je mee op het WK weekend? Volg deze stappen en je staat op de lijst!</p>
-
-      <div class="price-badge">
-        <span class="price-amount">70€</span>
-        <span class="price-label">per persoon</span>
-      </div>
-
+      <p class="cta-sub">Wil je mee op het WK weekend? Volg deze stappen!</p>
+      <div class="price-badge"><span class="price-amount">70€</span><span class="price-label">per persoon</span></div>
       <div class="cta-steps">
-        <div class="cta-step">
-          <div class="cta-step-num">1</div>
-          <div class="cta-step-text">Stuur een berichtje naar <strong>Jari</strong> met je naam om je in te schrijven.</div>
-        </div>
-        <div class="cta-step">
-          <div class="cta-step-num">2</div>
-          <div class="cta-step-text">Je ontvangt bevestiging en verdere info over betaling van de leiding.</div>
-        </div>
-        <div class="cta-step">
-          <div class="cta-step-num">3</div>
-          <div class="cta-step-text">Pak je tas in (zie de <button onclick="goTo('packing')" style="background:none;border:none;color:var(--gold);font-family:inherit;font-size:inherit;cursor:pointer;font-weight:600;text-decoration:underline;">meenemenlijst</button>) en geniet van het weekend! 🏆</div>
-        </div>
+        <div class="cta-step"><div class="cta-step-num">1</div><div class="cta-step-text">Stuur een berichtje naar <strong>Jari</strong> met je naam om je in te schrijven.</div></div>
+        <div class="cta-step"><div class="cta-step-num">2</div><div class="cta-step-text">Schrijf <strong>70€</strong> over naar onderstaande rekening.</div></div>
+        <div class="cta-step"><div class="cta-step-num">3</div><div class="cta-step-text">Pak je tas in (zie <button onclick="goTo('packing')" style="background:none;border:none;color:var(--gold);font-family:inherit;font-size:inherit;cursor:pointer;font-weight:600;text-decoration:underline;">meenemenlijst</button>) en geniet! 🏆</div></div>
       </div>
-
+      <div class="cta-card">
+        <div class="cta-card-label">🏦 Betaling — Overschrijving</div>
+        <div class="cta-card-value">KLJ Kruibeke</div>
+        <div class="cta-card-value mono">BE56 7376 1201 6388</div>
+      </div>
       <div class="cta-card">
         <div class="cta-card-label">📍 Locatie</div>
         <div class="cta-card-value">De Kievit — Roosendijk 109 Bus A</div>
       </div>
       <div class="cta-card">
         <div class="cta-card-label">🗓️ Datum</div>
-        <div class="cta-card-value">26 – 28 juni 2025 &nbsp;·&nbsp; vertrek 19:30 aan het lokaal</div>
+        <div class="cta-card-value">26 – 28 juni 2026 · vertrek 19:30 aan het lokaal</div>
       </div>
-
-      <p style="font-size:0.78rem;color:rgba(255,255,255,0.25);margin-top:1.5rem;">
-        Vragen? Neem contact op met de +16 leiding van KLJ Kruibeke.
-      </p>
+      <p style="font-size:0.78rem;color:rgba(255,255,255,0.25);margin-top:1.5rem;">Vragen? Neem contact op met Jari of Mathis.</p>
     </div>
   </section>
   <footer><p>Met veel liefde van de <span>+16 leiding</span> · KLJ Kruibeke · WK Weekend 2026</p></footer>
 </div>
 
 <script>
-  const pages = ['home','info','packing','signup'];
+  const pages = ['home','programma','info','packing','signup'];
 
   function goTo(id) {
     pages.forEach(p => {
       document.getElementById('page-' + p).classList.remove('active');
-      const btn    = document.getElementById('nav-' + p);
-      const mobBtn = document.getElementById('mob-' + p);
-      if (btn)    btn.classList.remove('active');
-      if (mobBtn) mobBtn.classList.remove('active');
+      const btn = document.getElementById('nav-' + p);
+      const mob = document.getElementById('mob-' + p);
+      if (btn) btn.classList.remove('active');
+      if (mob) mob.classList.remove('active');
     });
     document.getElementById('page-' + id).classList.add('active');
-    const btn    = document.getElementById('nav-' + id);
-    const mobBtn = document.getElementById('mob-' + id);
-    if (btn)    btn.classList.add('active');
-    if (mobBtn) mobBtn.classList.add('active');
+    const btn = document.getElementById('nav-' + id);
+    const mob = document.getElementById('mob-' + id);
+    if (btn) btn.classList.add('active');
+    if (mob) mob.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -912,6 +469,15 @@
 
   function toggle(el) {
     el.classList.toggle('checked');
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const all = document.querySelectorAll('.pack-list li');
+    const checked = document.querySelectorAll('.pack-list li.checked');
+    const pct = Math.round((checked.length / all.length) * 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-text').textContent = checked.length + ' van ' + all.length + ' ingepakt';
   }
 </script>
 </body>
