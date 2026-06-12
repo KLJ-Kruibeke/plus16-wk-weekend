@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WK Weekend +16 — KLJ Kruibeke</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #C8102E;
+    --red-dark: #9B0C22;
+    --red-light: #E8334A;
+    --gold: #F5C518;
+    --gold-dark: #C9A000;
+    --black: #0D0D0D;
+    --off-black: #1A1A1A;
+    --white: #FFFFFF;
+    --gray: #F7F7F7;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 3rem 2rem 6rem;
+    background: var(--black);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,16,46,0.25) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 80% 80%, rgba(245,197,24,0.08) 0%, transparent 60%);
+  }
+
+  .pitch-lines {
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 59px,
+        rgba(255,255,255,0.6) 59px,
+        rgba(255,255,255,0.6) 60px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 59px,
+        rgba(255,255,255,0.6) 59px,
+        rgba(255,255,255,0.6) 60px
+      );
+  }
+
+  .hero-badge {
+    background: var(--red);
+    color: var(--white);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.4rem 1.2rem;
+    border-radius: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4.5rem, 16vw, 10rem);
+    line-height: 0.9;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-title span.red { color: var(--red); }
+  .hero-title span.gold { color: var(--gold); }
+
+  .hero-ball {
+    font-size: clamp(3rem, 8vw, 5rem);
+    margin: 1rem 0;
+    position: relative;
+    z-index: 1;
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .hero-sub {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-cta {
+    margin-top: 2.5rem;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn-primary {
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    padding: 0.9rem 2rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--red-light); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    padding: 0.9rem 2rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+
+  .btn-outline:hover { border-color: var(--white); transform: translateY(-2px); }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.3);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 1;
+    animation: fadepulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes fadepulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+  }
+
+  /* SCOREBORD */
+  .scoreboard {
+    background: var(--off-black);
+    padding: 4rem 2rem;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .score-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .score-item {
+    background: var(--off-black);
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .score-icon { font-size: 1.8rem; }
+
+  .score-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .score-value.red { color: var(--red); }
+  .score-value.gold { color: var(--gold); }
+
+  .score-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* INFO SECTION */
+  .info-section {
+    padding: 5rem 2rem;
+    background: var(--black);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .info-card {
+    background: var(--off-black);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 0.5rem;
+    padding: 1.75rem;
+  }
+
+  .info-card-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .info-card-body {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .info-card-body strong {
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  /* MEENEMEN */
+  .packing-section {
+    background: var(--red-dark);
+    padding: 5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .packing-section::before {
+    content: '⚽';
+    position: absolute;
+    font-size: 20rem;
+    opacity: 0.04;
+    right: -3rem;
+    top: -3rem;
+    line-height: 1;
+  }
+
+  .packing-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .packing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .pack-category {
+    background: rgba(0,0,0,0.2);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .pack-category-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .pack-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .pack-list li {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.85);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    line-height: 1.4;
+  }
+
+  .pack-list li::before {
+    content: '—';
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 0.05em;
+    font-size: 0.75rem;
+  }
+
+  /* INSCHRIJVEN */
+  .cta-section {
+    background: var(--black);
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+
+  .cta-inner { max-width: 600px; margin: 0 auto; }
+
+  .cta-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 8vw, 5rem);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .cta-title span { color: var(--red); }
+
+  .cta-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .cta-contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--off-black);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 0.5rem;
+    padding: 1.25rem 2rem;
+    margin-bottom: 2.5rem;
+    font-size: 1rem;
+  }
+
+  .cta-contact strong { color: var(--gold); }
+
+  /* FOOTER */
+  footer {
+    background: var(--off-black);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.05em;
+  }
+
+  footer span { color: var(--red); }
+
+  /* DIVIDER */
+  .divider {
+    height: 3px;
+    background: linear-gradient(90deg, var(--black), var(--red), var(--gold), var(--red), var(--black));
+  }
+
+  @media (max-width: 480px) {
+    .hero-title { font-size: 4.5rem; }
+    .score-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="pitch-lines"></div>
+  <div class="hero-badge">KLJ Kruibeke — +16 leiding</div>
+  <h1 class="hero-title">
+    <span class="red">WK</span><br>
+    WEEK<span class="gold">END</span>
+  </h1>
+  <div class="hero-ball">⚽</div>
+  <p class="hero-sub">26 – 28 juni 2025 · De Kievit, Roosendijk</p>
+  <div class="hero-cta">
+    <a href="#inschrijven" class="btn-primary">Inschrijven</a>
+    <a href="#info" class="btn-outline">Meer info</a>
+  </div>
+  <p class="scroll-hint">↓ scroll voor info</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- SCOREBORD -->
+<section class="scoreboard">
+  <p class="section-label">⚽ De details op een rij</p>
+  <div class="score-grid">
+    <div class="score-item">
+      <div class="score-icon">📅</div>
+      <div class="score-value">26–28</div>
+      <div class="score-label">Juni 2025</div>
+    </div>
+    <div class="score-item">
+      <div class="score-icon">🕢</div>
+      <div class="score-value red">19:30</div>
+      <div class="score-label">Vertrek vrijdag</div>
+    </div>
+    <div class="score-item">
+      <div class="score-icon">🏠</div>
+      <div class="score-value gold">Namiddag</div>
+      <div class="score-label">Terug zondag</div>
+    </div>
+    <div class="score-item">
+      <div class="score-icon">💶</div>
+      <div class="score-value">70€</div>
+      <div class="score-label">Prijs</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- INFO -->
+<section class="info-section" id="info">
+  <p class="section-label">📋 Praktische info</p>
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="info-card-title">📍 Locatie</div>
+      <div class="info-card-body">
+        <strong>De Kievit</strong><br>
+        Roosendijk 109 Bus A<br>
+        <br>
+        We verzamelen vrijdag om <strong>19:30</strong> aan het lokaal.
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">🗓️ Wanneer</div>
+      <div class="info-card-body">
+        <strong>Vrijdag 26 juni</strong> — vertrek 19:30 aan het lokaal<br><br>
+        <strong>Zondag 28 juni</strong> — terug namiddag (afhankelijk van het verkeer)
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">💡 Goed om te weten</div>
+      <div class="info-card-body">
+        Breng max. <strong>één valies</strong> per persoon mee.<br><br>
+        Vragen? Stuur gerust een berichtje naar <strong>Jari</strong> of een andere leider.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WAT MEENEMEN -->
+<section class="packing-section">
+  <div class="packing-inner">
+    <p class="section-label" style="color: rgba(255,255,255,0.7);">🎒 Dit neem je mee</p>
+    <div class="packing-grid">
+      <div class="pack-category">
+        <div class="pack-category-title">🛏️ Slaapgerief</div>
+        <ul class="pack-list">
+          <li>Kussensloop</li>
+          <li>Hoeslaken</li>
+          <li>Slaapzak</li>
+          <li>Pyjama</li>
+          <li>Kussen</li>
+        </ul>
+      </div>
+      <div class="pack-category">
+        <div class="pack-category-title">👕 Kledij</div>
+        <ul class="pack-list">
+          <li>KLJ-kledij</li>
+          <li>Broeken, t-shirts, truien</li>
+          <li>Ondergoed & kousen</li>
+          <li>Bottinnen & waterschoenen</li>
+          <li>Zwemgerief</li>
+        </ul>
+      </div>
+      <div class="pack-category">
+        <div class="pack-category-title">🚿 Toiletgerief</div>
+        <ul class="pack-list">
+          <li>Shampoo & douchegel</li>
+          <li>Handdoeken & washandje</li>
+          <li>Tandenborstel & tandpasta</li>
+        </ul>
+      </div>
+      <div class="pack-category">
+        <div class="pack-category-title">🎒 Extra</div>
+        <ul class="pack-list">
+          <li>Bril of lenzen</li>
+          <li>Zakdoeken</li>
+          <li>Medicatie</li>
+          <li>Zaklamp</li>
+          <li>Pollepel</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- INSCHRIJVEN -->
+<section class="cta-section" id="inschrijven">
+  <div class="cta-inner">
+    <h2 class="cta-title">SCHRIJF JE <span>IN</span></h2>
+    <p class="cta-sub">Wil je mee op het WK weekend? Stuur een berichtje naar Jari om je in te schrijven. Doe dit zo snel mogelijk!</p>
+    <div class="cta-contact">
+      📲 Stuur een bericht naar <strong>Jari</strong>
+    </div>
+    <br>
+    <p style="font-size: 0.8rem; color: rgba(255,255,255,0.3); margin-top: 1rem;">
+      Vragen? Neem contact op met de +16 leiding van KLJ Kruibeke.
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Met ❤️ van de <span>+16 leiding</span> · KLJ Kruibeke · WK Weekend 2025</p>
+</footer>
+
+</body>
+</html>
