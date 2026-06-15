@@ -172,6 +172,13 @@
   .price-amount { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--red); line-height: 1; }
   .price-label { font-size: 0.8rem; color: rgba(255,255,255,0.5); font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
 
+  /* DUO BANNER */
+  .duo-banner { position: relative; display: flex; align-items: flex-end; justify-content: center; min-height: 280px; overflow: hidden; margin-top: 2rem; }
+  .duo-img { position: absolute; bottom: 0; width: 260px; mix-blend-mode: lighten; opacity: 0.9; }
+  .duo-img-left { left: 0; transform: scaleX(-1); }
+  .duo-img-right { right: 0; }
+  .duo-text { position: relative; z-index: 2; text-align: center; padding: 2rem 1rem; }
+
   /* FOOTER */
   footer { background: var(--off-black); border-top: 1px solid rgba(255,255,255,0.06); padding: 1.5rem 2rem; text-align: center; font-size: 0.78rem; color: rgba(255,255,255,0.25); letter-spacing: 0.05em; }
   footer span { color: var(--red); }
@@ -189,8 +196,9 @@
 
   .flip-wrap{perspective:1000px;width:100%;max-width:220px}.flip-inner{position:relative;width:100%;transition:transform 0.6s;transform-style:preserve-3d;cursor:pointer}.flip-inner.flipped{transform:rotateY(180deg)}.flip-front,.flip-back{backface-visibility:hidden;-webkit-backface-visibility:hidden}
   @media (max-width: 600px) {
-    .duo-img { display: none !important; }
-    .duo-banner { min-height: unset !important; padding: 2rem 1rem !important; }
+    .duo-banner { flex-direction: column !important; min-height: unset !important; padding: 1.5rem 1rem !important; gap: 1rem; }
+    .duo-img { position: static !important; width: 120px !important; opacity: 1 !important; transform: none !important; mix-blend-mode: normal !important; border-radius: 0.5rem; }
+    .duo-text { position: static !important; text-align: center; }
     .nav-links { display: none; }
     .hamburger { display: flex; }
     .score-grid { grid-template-columns: repeat(2, 1fr); }
@@ -381,7 +389,14 @@
           </div>
         </div>
       </div>
-      <div class="duo-banner"><img src="Jari.png" alt="Jari" class="duo-img left" loading="lazy" style="position:absolute;bottom:0;left:0;width:260px;mix-blend-mode:lighten;opacity:0.9;transform:scaleX(-1)"><div style="position:relative;z-index:2;text-align:center;padding:2rem 1rem"><div style="font-family:Bebas Neue,sans-serif;font-size:3.5rem;line-height:1;color:#fff">Jullie <span style="color:#C8102E">leiding</span></div><div style="font-size:.85rem;color:rgba(255,255,255,.5);letter-spacing:.1em;text-transform:uppercase;margin-top:.5rem">Jari &amp; Mathis begeleiden jullie weekend</div></div><img src="Mathis.png" alt="Mathis" class="duo-img right" loading="lazy" style="position:absolute;bottom:0;right:0;width:260px;mix-blend-mode:lighten;opacity:0.9"></div>
+      <div class="duo-banner">
+        <img src="Jari.png" alt="Jari" class="duo-img duo-img-left" loading="lazy">
+        <div class="duo-text">
+          <div style="font-family:Bebas Neue,sans-serif;font-size:3.5rem;line-height:1;color:#fff">Jullie <span style="color:#C8102E">leiding</span></div>
+          <div style="font-size:.85rem;color:rgba(255,255,255,.5);letter-spacing:.1em;text-transform:uppercase;margin-top:.5rem">Jari &amp; Mathis begeleiden jullie weekend</div>
+        </div>
+        <img src="Mathis.png" alt="Mathis" class="duo-img duo-img-right" loading="lazy">
+      </div>
     </div>
   </section>
   <footer><p>Met veel liefde van de <span>+16 leiding</span> · KLJ Kruibeke · WK Weekend 2026</p></footer>
