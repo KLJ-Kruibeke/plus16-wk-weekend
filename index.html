@@ -188,11 +188,15 @@
   .fifa-card img { width: 100%; display: block; }
 
   .flip-wrap{perspective:1000px;width:100%;max-width:220px}.flip-inner{position:relative;width:100%;transition:transform 0.6s;transform-style:preserve-3d;cursor:pointer}.flip-inner.flipped{transform:rotateY(180deg)}.flip-front,.flip-back{backface-visibility:hidden;-webkit-backface-visibility:hidden}
-  @media (max-width: 600px) { .duo-img { width: 110px !important; opacity: 0.6 !important; } .duo-banner { min-height: 200px !important; } .duo-center div:first-child { font-size: 2rem !important; } 
+  @media (max-width: 600px) {
+    .duo-img { display: none !important; }
+    .duo-banner { min-height: unset !important; padding: 2rem 1rem !important; }
     .nav-links { display: none; }
     .hamburger { display: flex; }
     .score-grid { grid-template-columns: repeat(2, 1fr); }
-    .hero-title { font-size: 4.5rem; } .cards-grid { grid-template-columns: repeat(2, 1fr); } .packing-grid { grid-template-columns: 1fr; } .packing-grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 4.5rem; }
+    .cards-grid { grid-template-columns: repeat(2, 1fr); }
+    .packing-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -238,7 +242,7 @@
       <div class="score-item"><div class="score-icon">📅</div><div class="score-value">26–28</div><div class="score-label">Juni 2026</div></div>
       <div class="score-item"><div class="score-icon">🕢</div><div class="score-value red">19:30</div><div class="score-label">Vertrek vrijdag</div></div>
       <div class="score-item"><div class="score-icon">🏠</div><div class="score-value gold">Namiddag</div><div class="score-label">Terug zondag</div></div>
-      <div class="score-item"><div class="score-icon">💶</div><div class="score-value">70€</div><div class="score-label">Per persoon</div></div>
+      <div class="score-item"><div class="score-icon">💶</div><div class="score-value">95€</div><div class="score-label">Per persoon</div></div>
       
     </div>
   </section>
@@ -373,8 +377,7 @@
         <div class="info-card">
           <div class="info-card-title">💡 Goed om te weten</div>
           <div class="info-card-body">
-            Breng max. <strong>één valies</strong> per persoon mee.<br><br>
-            Bekijk de activiteitenlijst voor eventuele benodigdheden.
+            Bekijk de meeneemlijst voor alles wat je nodig hebt.
           </div>
         </div>
       </div>
@@ -388,20 +391,21 @@
 <div class="page" id="page-packing">
   <section class="packing-page">
     <div class="packing-inner">
-      <p class="section-label" style="color:rgba(255,255,255,0.7);">🎒 Dit neem je mee</p>
+      <p class="section-label" style="color:rgba(255,255,255,0.7);">🎒 Dit steek je in je voetbalkabas</p>
       <div class="pack-progress">
-        <div class="progress-label" id="progress-text">0 van 19 ingepakt</div>
+        <div class="progress-label" id="progress-text">0 van 25 ingepakt</div>
         <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
       </div>
       <div class="packing-grid" style="margin-top:1.5rem">
         <div class="pack-category">
           <div class="pack-category-title">🛏️ Slaapgerief</div>
           <ul class="pack-list">
-            <li onclick="toggle(this)">Kussensloop</li>
-            <li onclick="toggle(this)">Hoeslaken</li>
             <li onclick="toggle(this)">Slaapzak</li>
-            <li onclick="toggle(this)">Pyjama</li>
             <li onclick="toggle(this)">Kussen</li>
+            <li onclick="toggle(this)">Kussensloop</li>
+            <li onclick="toggle(this)">Bedovertrek</li>
+            <li onclick="toggle(this)">Extra dekentje</li>
+            <li onclick="toggle(this)">Pyjama</li>
           </ul>
         </div>
         <div class="pack-category">
@@ -410,29 +414,32 @@
             <li onclick="toggle(this)">KLJ-kledij</li>
             <li onclick="toggle(this)">Broeken, t-shirts, truien</li>
             <li onclick="toggle(this)">Ondergoed &amp; kousen</li>
-            <li onclick="toggle(this)">Bottinnen &amp; waterschoenen</li>
+            <li onclick="toggle(this)">Bottinnen/schoenen die vuil mogen worden</li>
             <li onclick="toggle(this)">Zwemgerief</li>
+            <li onclick="toggle(this)">Pet &amp; zonnebril</li>
           </ul>
         </div>
         <div class="pack-category">
           <div class="pack-category-title">🚿 Toiletgerief</div>
           <ul class="pack-list">
-            <li onclick="toggle(this)">Shampoo &amp; douchegel</li>
+            <li onclick="toggle(this)">Genoeg shampoo &amp; douchegel</li>
+            <li onclick="toggle(this)">Deo</li>
             <li onclick="toggle(this)">Handdoeken &amp; washandje</li>
             <li onclick="toggle(this)">Tandenborstel &amp; tandpasta</li>
+            <li onclick="toggle(this)">Kam</li>
+            <li onclick="toggle(this)">Tampons</li>
           </ul>
         </div>
         <div class="pack-category">
           <div class="pack-category-title">🎒 Extra</div>
           <ul class="pack-list">
-            
             <li onclick="toggle(this)">Croque monsieur machine</li>
-            <li onclick="toggle(this)">Pollepel</li>
+            <li onclick="toggle(this)">Pollepel <span style="color:rgba(255,255,255,0.4);font-size:0.75rem">(wat we gaan doen is nog een verrassing)</span></li>
             <li onclick="toggle(this)">Bril of lenzen</li>
             <li onclick="toggle(this)">Zakdoeken</li>
             <li onclick="toggle(this)">Medicatie</li>
             <li onclick="toggle(this)">Zaklamp</li>
-            
+            <li onclick="toggle(this)">Verstand</li>
           </ul>
         </div>
       </div>
@@ -450,11 +457,11 @@
     <div class="cta-inner">
       <h2 class="cta-title">SCHRIJF JE <span>IN</span></h2>
       <p class="cta-sub">Wil je mee op het WK weekend? Volg deze stappen!</p>
-      <div class="price-badge"><span class="price-amount">70€</span><span class="price-label">per persoon</span></div>
+      <div class="price-badge"><span class="price-amount">95€</span><span class="price-label">per persoon</span></div>
       <div class="cta-steps">
         <div class="cta-step"><div class="cta-step-num">1</div><div class="cta-step-text">Stuur een berichtje naar <strong>Jari</strong> met je naam om je in te schrijven.</div></div>
-        <div class="cta-step"><div class="cta-step-num">2</div><div class="cta-step-text">Schrijf <strong>70€</strong> over naar onderstaande rekening.</div></div>
-        <div class="cta-step"><div class="cta-step-num">3</div><div class="cta-step-text">Pak je voetbaltas in (zie <button onclick="goTo('packing')" style="background:none;border:none;color:var(--gold);font-family:inherit;font-size:inherit;cursor:pointer;font-weight:600;text-decoration:underline;">meenemenlijst</button>) en geniet! 🏆</div></div>
+        <div class="cta-step"><div class="cta-step-num">2</div><div class="cta-step-text">Pak je voetbalkabas in (zie <button onclick="goTo('packing')" style="background:none;border:none;color:var(--gold);font-family:inherit;font-size:inherit;cursor:pointer;font-weight:600;text-decoration:underline;">meenemenlijst</button>) en geniet! 🏆</div></div>
+        <div class="cta-step"><div class="cta-step-num">3</div><div class="cta-step-text">Kom verkleed naar het lokaal — in je <strong>matchkledij van de Belgen</strong> of je voetbalkledij! 🇧🇪</div></div>
       </div>
       <div class="cta-card">
         <div class="cta-card-label">🏦 Betaling — Overschrijving</div>
@@ -475,80 +482,8 @@
   <footer><p>Met veel liefde van de <span>+16 leiding</span> · KLJ Kruibeke · WK Weekend 2026</p></footer>
 </div>
 
-<!-- MUSIC BUTTON -->
-<button id="music-btn" onclick="toggleMusic()" title="Muziek aan/uit" style="
-  position:fixed;bottom:1.5rem;right:1.5rem;z-index:200;
-  width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;
-  background:var(--red);color:#fff;font-size:1.4rem;
-  box-shadow:0 4px 20px rgba(200,16,46,0.5);
-  transition:transform 0.2s,background 0.2s;
-  display:flex;align-items:center;justify-content:center;
-">🔇</button>
-
 <script>
-  /* ── WK FANFARE via Web Audio API ── */
-  let audioCtx = null, musicPlaying = false, scheduleTimer = null;
-  const BPM = 128, beat = 60 / BPM;
-
-  // Melody: [freq Hz, duration in beats]  (0 = rest)
-  const melody = [
-    [523,1],[587,1],[659,2],[587,1],[523,1],[440,2],[0,1],
-    [440,1],[494,1],[523,2],[659,1],[587,1],[523,3],[0,1],
-    [392,1],[440,1],[494,1],[523,2],[587,1],[523,1],[440,2],[0,1],
-    [523,1],[659,1],[784,2],[659,1],[523,1],[587,4],[0,2],
-  ];
-
-  function playNote(ctx, freq, startTime, duration) {
-    if (freq === 0) return;
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.type = 'square';
-    osc.frequency.value = freq;
-    gain.gain.setValueAtTime(0.18, startTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration - 0.02);
-    osc.connect(gain); gain.connect(ctx.destination);
-    osc.start(startTime); osc.stop(startTime + duration);
-  }
-
-  function scheduleMelody(ctx, startTime) {
-    let t = startTime;
-    melody.forEach(([freq, dur]) => {
-      playNote(ctx, freq, t, dur * beat * 0.92);
-      t += dur * beat;
-    });
-    return t; // return end time for looping
-  }
-
-  function startMusic() {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    let nextStart = audioCtx.currentTime + 0.05;
-    function loop() {
-      if (!musicPlaying) return;
-      nextStart = scheduleMelody(audioCtx, nextStart);
-      scheduleTimer = setTimeout(loop, (nextStart - audioCtx.currentTime - 0.5) * 1000);
-    }
-    loop();
-  }
-
-  function toggleMusic() {
-    const btn = document.getElementById('music-btn');
-    if (!musicPlaying) {
-      musicPlaying = true;
-      startMusic();
-      btn.textContent = '🔊';
-      btn.style.background = 'var(--gold)';
-      btn.style.color = '#000';
-    } else {
-      musicPlaying = false;
-      clearTimeout(scheduleTimer);
-      if (audioCtx) { audioCtx.close(); audioCtx = null; }
-      btn.textContent = '🔇';
-      btn.style.background = 'var(--red)';
-      btn.style.color = '#fff';
-    }
-  }
-
-  const pages = ['home','programma','info','packing','signup'];
+const pages = ['home','programma','info','packing','signup'];
 
   function goTo(id) {
     pages.forEach(p => {
