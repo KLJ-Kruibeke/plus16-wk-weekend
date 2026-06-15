@@ -379,12 +379,6 @@
         </div>
       </div>
       <div class="duo-banner"><img src="Jari.png" alt="Jari" class="duo-img left" loading="lazy" style="position:absolute;bottom:0;left:0;width:260px;mix-blend-mode:lighten;opacity:0.9;transform:scaleX(-1)"><div style="position:relative;z-index:2;text-align:center;padding:2rem 1rem"><div style="font-family:Bebas Neue,sans-serif;font-size:3.5rem;line-height:1;color:#fff">Jullie <span style="color:#C8102E">leiding</span></div><div style="font-size:.85rem;color:rgba(255,255,255,.5);letter-spacing:.1em;text-transform:uppercase;margin-top:.5rem">Jari &amp; Mathis begeleiden jullie weekend</div></div><img src="Mathis.png" alt="Mathis" class="duo-img right" loading="lazy" style="position:absolute;bottom:0;right:0;width:260px;mix-blend-mode:lighten;opacity:0.9"></div>
-      <div class="timeline" style="margin-top:3rem">
-        <div class="timeline-title">🗓️ Op een rij</div>
-        <div class="tl-item"><div class="tl-dot">📅</div><div class="tl-content"><div class="tl-day">Vrijdag 26 juni</div><div class="tl-desc">Vertrek om <strong>19:30</strong> aan het lokaal richting De Kievit.</div></div></div>
-        <div class="tl-item"><div class="tl-dot">⚽</div><div class="tl-content"><div class="tl-day">Zaterdag 27 juni</div><div class="tl-desc">Volle dag met activiteiten, eten en WK-sfeer.</div></div></div>
-        <div class="tl-item"><div class="tl-dot gold-dot">🏠</div><div class="tl-content"><div class="tl-day gold">Zondag 28 juni</div><div class="tl-desc">Brunch om 11u, opruimen, en terug rond <strong>16:00</strong>.</div></div></div>
-      </div>
     </div>
   </section>
   <footer><p>Met veel liefde van de <span>+16 leiding</span> · KLJ Kruibeke · WK Weekend 2026</p></footer>
@@ -486,7 +480,79 @@
   <footer><p>Met veel liefde van de <span>+16 leiding</span> · KLJ Kruibeke · WK Weekend 2026</p></footer>
 </div>
 
+<!-- MUSIC BUTTON -->
+<button id="music-btn" onclick="toggleMusic()" title="Muziek aan/uit" style="
+  position:fixed;bottom:1.5rem;right:1.5rem;z-index:200;
+  width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;
+  background:var(--red);color:#fff;font-size:1.4rem;
+  box-shadow:0 4px 20px rgba(200,16,46,0.5);
+  transition:transform 0.2s,background 0.2s;
+  display:flex;align-items:center;justify-content:center;
+">🔇</button>
+
 <script>
+  /* ── WK FANFARE via Web Audio API ── */
+  let audioCtx = null, musicPlaying = false, scheduleTimer = null;
+  const BPM = 128, beat = 60 / BPM;
+
+  // Melody: [freq Hz, duration in beats]  (0 = rest)
+  const melody = [
+    [523,1],[587,1],[659,2],[587,1],[523,1],[440,2],[0,1],
+    [440,1],[494,1],[523,2],[659,1],[587,1],[523,3],[0,1],
+    [392,1],[440,1],[494,1],[523,2],[587,1],[523,1],[440,2],[0,1],
+    [523,1],[659,1],[784,2],[659,1],[523,1],[587,4],[0,2],
+  ];
+
+  function playNote(ctx, freq, startTime, duration) {
+    if (freq === 0) return;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'square';
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0.18, startTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration - 0.02);
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.start(startTime); osc.stop(startTime + duration);
+  }
+
+  function scheduleMelody(ctx, startTime) {
+    let t = startTime;
+    melody.forEach(([freq, dur]) => {
+      playNote(ctx, freq, t, dur * beat * 0.92);
+      t += dur * beat;
+    });
+    return t; // return end time for looping
+  }
+
+  function startMusic() {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    let nextStart = audioCtx.currentTime + 0.05;
+    function loop() {
+      if (!musicPlaying) return;
+      nextStart = scheduleMelody(audioCtx, nextStart);
+      scheduleTimer = setTimeout(loop, (nextStart - audioCtx.currentTime - 0.5) * 1000);
+    }
+    loop();
+  }
+
+  function toggleMusic() {
+    const btn = document.getElementById('music-btn');
+    if (!musicPlaying) {
+      musicPlaying = true;
+      startMusic();
+      btn.textContent = '🔊';
+      btn.style.background = 'var(--gold)';
+      btn.style.color = '#000';
+    } else {
+      musicPlaying = false;
+      clearTimeout(scheduleTimer);
+      if (audioCtx) { audioCtx.close(); audioCtx = null; }
+      btn.textContent = '🔇';
+      btn.style.background = 'var(--red)';
+      btn.style.color = '#fff';
+    }
+  }
+
   const pages = ['home','programma','info','packing','signup'];
 
   function goTo(id) {
