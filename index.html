@@ -196,6 +196,8 @@
 
   .flip-wrap{perspective:1000px;width:100%;max-width:220px}.flip-inner{position:relative;width:100%;transition:transform 0.6s;transform-style:preserve-3d;cursor:pointer}.flip-inner.flipped{transform:rotateY(180deg)}.flip-front,.flip-back{backface-visibility:hidden;-webkit-backface-visibility:hidden}
   @media (max-width: 600px) {
+    .duo-banner { min-height: 200px; }
+    .duo-img { width: 130px; }
     .nav-links { display: none; }
     .hamburger { display: flex; }
     .score-grid { grid-template-columns: repeat(2, 1fr); }
@@ -213,7 +215,7 @@
     <li><button onclick="goTo('home')"      id="nav-home"      class="active">Home</button></li>
     <li><button onclick="goTo('programma')" id="nav-programma">Programma</button></li>
     <li><button onclick="goTo('info')"      id="nav-info"      >Info</button></li>
-    <li><button onclick="goTo('packing')"   id="nav-packing"   >Meenemen</button></li>
+    <li><button onclick="goTo('packing')"   id="nav-packing"   >Checklist</button></li>
     <li><button onclick="goTo('signup')"    id="nav-signup"    >Inschrijven</button></li>
   </ul>
   <div class="nav-dot"></div>
@@ -224,7 +226,7 @@
   <button onclick="goTo('home');toggleMobile()"      id="mob-home"      class="active">🏠 Home</button>
   <button onclick="goTo('programma');toggleMobile()" id="mob-programma">📅 Programma</button>
   <button onclick="goTo('info');toggleMobile()"      id="mob-info"      >📋 Info</button>
-  <button onclick="goTo('packing');toggleMobile()"   id="mob-packing"   >🎒 Meenemen</button>
+  <button onclick="goTo('packing');toggleMobile()"   id="mob-packing"   >🎒 Checklist</button>
   <button onclick="goTo('signup');toggleMobile()"    id="mob-signup"    >✍️ Inschrijven</button>
 </div>
 
@@ -372,11 +374,9 @@
           </div>
         </div>
         <div class="info-card">
-          <div class="info-card-title">👥 Leiding</div>
+          <div class="info-card-title">🎽 Dresscode</div>
           <div class="info-card-body">
-            <strong>Jari</strong> — stamhoofd & uitnodiging<br><br>
-            <strong>Mathis</strong> — activiteiten & huisje<br><br>
-            <strong>Ben</strong> — verslag
+            Kom verkleed naar het lokaal op vrijdag! Trek je <strong>Belgisch voetbalshirt</strong> aan of kom in je voetbalkledij/sportieve kledij. Hoe meer WK-sfeer, hoe beter! 🇧🇪
           </div>
         </div>
         <div class="info-card">
@@ -405,7 +405,7 @@
     <div class="packing-inner">
       <p class="section-label" style="color:rgba(255,255,255,0.7);">🎒 Dit steek je in je voetbalkabas</p>
       <div class="pack-progress">
-        <div class="progress-label" id="progress-text">0 van 25 ingepakt</div>
+        <div class="progress-label" id="progress-text">0 van 26 ingepakt</div>
         <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
       </div>
       <div class="packing-grid" style="margin-top:1.5rem">
@@ -423,6 +423,7 @@
         <div class="pack-category">
           <div class="pack-category-title">👕 Kledij</div>
           <ul class="pack-list">
+            <li onclick="toggle(this)">Voetbalkledij/sportieve kledij</li>
             <li onclick="toggle(this)">KLJ-kledij</li>
             <li onclick="toggle(this)">Broeken, t-shirts, truien</li>
             <li onclick="toggle(this)">Ondergoed &amp; kousen</li>
@@ -446,7 +447,7 @@
           <div class="pack-category-title">🎒 Extra</div>
           <ul class="pack-list">
             <li onclick="toggle(this)">Croque monsieur machine</li>
-            <li onclick="toggle(this)">Pollepel <span style="color:rgba(255,255,255,0.4);font-size:0.75rem">(wat we gaan doen is nog een verrassing)</span></li>
+            <li onclick="toggle(this)">Pollepel</li>
             <li onclick="toggle(this)">Bril of lenzen</li>
             <li onclick="toggle(this)">Zakdoeken</li>
             <li onclick="toggle(this)">Medicatie</li>
